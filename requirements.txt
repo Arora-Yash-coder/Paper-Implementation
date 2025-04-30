@@ -1,28 +1,12 @@
-# Core libraries
-numpy
+streamlit
 pandas
-re
-ast
-os
-
-# Machine Learning
+numpy
+matplotlib
+seaborn
 scikit-learn
-joblib
-
-# Deep Learning
-tensorflow
-
-# NLP
 nltk
 textblob
 vaderSentiment
-
-# Visualization
-matplotlib
-seaborn
-
-# Web App
-streamlit
-
-# Watchdog (from your logs)
+tensorflow
+joblib
 watchdog==6.0.0
