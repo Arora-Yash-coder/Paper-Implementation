@@ -3,10 +3,15 @@ pandas
 numpy
 matplotlib
 seaborn
+
+# Machine Learning
 scikit-learn
+joblib
+
+# Deep Learning
+tensorflow
+
+# NLP
 nltk
 textblob
 vaderSentiment
-tensorflow
-joblib
-watchdog==6.0.0
