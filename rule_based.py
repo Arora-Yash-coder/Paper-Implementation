@@ -1,55 +1,111 @@
-# RULE-BASED SENTIMENT ANALYSIS (Updated)
+# RULE-BASED SENTIMENT ANALYSIS
 import pandas as pd
 import re
-import ast
 import os
 import joblib
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from textblob import TextBlob
+from sklearn.metrics import classification_report
 
-# Create models directory if not exists
-os.makedirs("models", exist_ok=True)
+# Configure paths
+DATA_PATH = "data/hmpv_comments_labeled.csv"
+RESULTS_DIR = "results"
+MODELS_DIR = "models"
 
-print("📥 Loading dataset...")
-df = pd.read_csv("hmpv_tweets.csv")
+# Create directories
+os.makedirs(RESULTS_DIR, exist_ok=True)
+os.makedirs(MODELS_DIR, exist_ok=True)
 
-print("🔄 Exploding comments...")
-df['comments'] = df['comments'].apply(lambda x: ast.literal_eval(x))
-
-comments_data = []
-for idx, row in df.iterrows():
-    for comment in row['comments']:
-        comments_data.append({
-            'post_index': idx,
-            'comment': comment
-        })
-
-comments_df = pd.DataFrame(comments_data)
-
-print("🧹 Cleaning comments...")
 def clean_text(text):
-    text = re.sub(r"http\S+|www\S+", '', text.lower())
+    """Clean and normalize text data"""
+    text = re.sub(r"http\S+|www\S+", '', str(text).lower())
     return re.sub(r'[^a-zA-Z ]', '', text).strip()
 
-comments_df['clean_comment'] = comments_df['comment'].apply(clean_text)
+def validate_sentiment(df):
+    """Clean and validate sentiment labels"""
+    # Convert to numeric and handle invalid values
+    df['sentiment'] = pd.to_numeric(df['sentiment'], errors='coerce')
+    # Fill NaN with neutral (0) and convert to integers
+    df['sentiment'] = df['sentiment'].fillna(0).astype(int)
+    # Ensure values are within [-1, 0, 1]
+    df['sentiment'] = df['sentiment'].apply(lambda x: x if x in {-1, 0, 1} else 0)
+    return df
 
-print("🧠 Initializing sentiment analyzers...")
-analyzer = SentimentIntensityAnalyzer()
+def main():
+    # Load and preprocess data
+    print("📥 Loading labeled dataset...")
+    df = pd.read_csv(DATA_PATH)
+    
+    # Clean and validate sentiment labels
+    df = validate_sentiment(df)
+    
+    # Clean comments
+    print("🧹 Cleaning comments...")
+    df['clean_comment'] = df['comment'].apply(clean_text)
 
-print("🔍 Applying VADER sentiment analysis...")
-comments_df['vader_score'] = comments_df['clean_comment'].apply(lambda x: analyzer.polarity_scores(x)['compound'])
-comments_df['vader_sentiment'] = comments_df['vader_score'].apply(lambda x: -1 if x < -0.05 else (1 if x > 0.05 else 0))
+    # Initialize analyzers
+    print("🧠 Initializing sentiment analyzers...")
+    vader_analyzer = SentimentIntensityAnalyzer()
 
-print("🔍 Applying TextBlob sentiment analysis...")
-comments_df['textblob_score'] = comments_df['clean_comment'].apply(lambda x: TextBlob(x).sentiment.polarity)
-comments_df['textblob_sentiment'] = comments_df['textblob_score'].apply(lambda x: -1 if x < -0.1 else (1 if x > 0.1 else 0))
+    # VADER Analysis
+    print("🔍 Applying VADER analysis...")
+    df['vader_score'] = df['clean_comment'].apply(
+        lambda x: vader_analyzer.polarity_scores(x)['compound']
+    )
+    df['vader_sentiment'] = df['vader_score'].apply(
+        lambda x: -1 if x < -0.05 else (1 if x > 0.05 else 0)
+    ).astype(int)
 
-# Save results
-output_file = "hmpv_rule_based_results.csv"
-comments_df.to_csv(output_file, index=False)
-print(f"✅ Rule-based results saved to {output_file}")
+    # TextBlob Analysis
+    print("🔍 Applying TextBlob analysis...")
+    df['textblob_score'] = df['clean_comment'].apply(
+        lambda x: TextBlob(x).sentiment.polarity
+    )
+    df['textblob_sentiment'] = df['textblob_score'].apply(
+        lambda x: -1 if x < -0.1 else (1 if x > 0.1 else 0)
+    ).astype(int)
 
-# Save models
-joblib.dump(analyzer, "models/vader_analyzer.joblib")
-joblib.dump(TextBlob, "models/textblob_sentiment_function.joblib")  # Function-like storage
-print("💾 Sentiment analyzers saved to 'models/' folder")
+    # Generate reports
+    print("📊 Generating classification reports...")
+    
+    # VADER report
+    vader_report = classification_report(
+        df['sentiment'], 
+        df['vader_sentiment'],
+        target_names=['Negative', 'Neutral', 'Positive'],
+        output_dict=True
+    )
+    pd.DataFrame(vader_report).transpose().to_csv(
+        f"{RESULTS_DIR}/vader_classification_report.csv"
+    )
+
+    # TextBlob report
+    textblob_report = classification_report(
+        df['sentiment'], 
+        df['textblob_sentiment'],
+        target_names=['Negative', 'Neutral', 'Positive'],
+        output_dict=True
+    )
+    pd.DataFrame(textblob_report).transpose().to_csv(
+        f"{RESULTS_DIR}/textblob_classification_report.csv"
+    )
+
+    # Save results
+    output_cols = [
+        'index', 'comment', 'sentiment', 'clean_comment',
+        'vader_score', 'vader_sentiment',
+        'textblob_score', 'textblob_sentiment'
+    ]
+    
+    df[output_cols].to_csv(
+        f"{RESULTS_DIR}/hmpv_sentiment_results.csv", index=False
+    )
+    
+    # Save models
+    joblib.dump(vader_analyzer, f"{MODELS_DIR}/vader_analyzer.joblib")
+    joblib.dump(TextBlob, f"{MODELS_DIR}/textblob_analyzer.joblib")
+    
+    print("✅ Analysis complete. Results saved to 'results/' directory")
+
+if __name__ == "__main__":
+    main()

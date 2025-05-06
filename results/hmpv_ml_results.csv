@@ -1,0 +1,630 @@
+index,comment,sentiment,emotion,clean_comment,naive_bayes_sentiment,naive_bayes_emotion,naive_bayes_emotion_encoded,svm_sentiment,svm_emotion,svm_emotion_encoded,random_forest_sentiment,random_forest_emotion,random_forest_emotion_encoded
+0,Wait first let me buy a gaming laptop so that I can spend my time in lockdown well.,1,enthusiasm,wait first let me buy a gaming laptop so that i can spend my time in lockdown well,1,unemotional,10,1,unemotional,10,1,unemotional,10
+1,I dont even care anymore at this rate just kill me,-1,sad,i dont even care anymore at this rate just kill me,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+2,"I’m a Pediatric Pulmonary RN. This is NOT a new virus. This is already very well established in the US. From Wikipedia:
+
+“As of 2016, it was the second most common cause (after respiratory syncytial virus (RSV)) of acute respiratory tract illness in otherwise-healthy children under the age of 5 in a large US outpatient clinic.[3]”
+
+We’ve already reached some sort of equilibrium with this virus in our population. China is just having a local epidemic. Which is different from a pandemic. I know everyone’s still a bit traumatized by Covid 19, but this is not equivalent. Please, stop spreading unfounded fear.",0,relief,im a pediatric pulmonary rn this is not a new virus this is already very well established in the us from wikipediaas of  it was the second most common cause after respiratory syncytial virus rsv of acute respiratory tract illness in otherwisehealthy children under the age of  in a large us outpatient clinicweve already reached some sort of equilibrium with this virus in our population china is just having a local epidemic which is different from a pandemic i know everyones still a bit traumatized by covid  but this is not equivalent please stop spreading unfounded fear,0,unemotional,10,0,unemotional,10,0,relief,6
+3,"![gif](giphy|1B96DyGOryGLKFb1HQ)
+
+We got something else on our minds",0,unemotional,gifgiphybdygoryglkfbhqwe got something else on our minds,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+4,"""new""",0,unemotional,new,0,unemotional,10,0,unemotional,10,0,unemotional,10
+5,"Being lockdown with GTA 6, Damn.",1,joy,being lockdown with gta  damn,-1,unemotional,10,1,unemotional,10,1,fear,3
+6,![gif](giphy|p7ESzgUi7li93Hxjte|downsized),0,unemotional,gifgiphypeszguilihxjtedownsized,0,unemotional,10,0,unemotional,10,0,unemotional,10
+7,Because it’s not fucking new,-1,anger,because its not fucking new,0,unemotional,10,0,anger,0,0,anger,0
+8,"Bro what.... this virus has been identified in 2001. Its not a new virus at all. Perhaps there was the first significant number of infections more recently, but we're all pretending this is something new that doctors have never seen before like covid",0,unemotional,bro what this virus has been identified in  its not a new virus at all perhaps there was the first significant number of infections more recently but were all pretending this is something new that doctors have never seen before like covid,0,unemotional,10,0,unemotional,10,0,unemotional,10
+9,"Oh you want me to take another multi-month staycation to play videogames for 16 hours a day?
+
+Say it ain't so",-1,disgust,oh you want me to take another multimonth staycation to play videogames for  hours a daysay it aint so,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+10,Not new and didn't start in China,0,unemotional,not new and didnt start in china,0,unemotional,10,0,unemotional,10,0,unemotional,10
+11,"Not again bro, The pandemic took years of my 20s",-1,sad,not again bro the pandemic took years of my s,-1,unemotional,10,-1,sad,7,-1,sad,7
+12,"Tbh, I kinda enjoyed the covid years.",1,relief,tbh i kinda enjoyed the covid years,1,unemotional,10,1,unemotional,10,1,unemotional,10
+13,"""The clinical features and severity of HMPV are similar to those of RSV""
+
+So yes, it is a joke.",-1,anger,the clinical features and severity of hmpv are similar to those of rsvso yes it is a joke,-1,unemotional,10,-1,anger,0,-1,anger,0
+14,Is coffin dance coming back though?,0,surprise,is coffin dance coming back though,0,unemotional,10,0,unemotional,10,0,unemotional,10
+15,It isn't a new virus. Jesus fucking Christ social media really sucks nowadays,0,unemotional,it isnt a new virus jesus fucking christ social media really sucks nowadays,0,unemotional,10,0,unemotional,10,0,unemotional,10
+16,Why be afraid when you can embrace the sweet release of death?,-1,sad,why be afraid when you can embrace the sweet release of death,-1,unemotional,10,-1,sad,7,-1,sad,7
+17,No way we got pandemic s2 before gta6,0,unemotional,no way we got pandemic s before gta,0,unemotional,10,0,unemotional,10,0,unemotional,10
+18,That's what happens when people can't catch a break. Life's been so bad lately I wouldn't mind a virus hitting me at this point.,-1,sympathy,thats what happens when people cant catch a break lifes been so bad lately i wouldnt mind a virus hitting me at this point,-1,unemotional,10,-1,sympathy,9,-1,sympathy,9
+19,"God, Bro just gave up and go play rebel inc instead, you suck ass at plague inc",-1,anger,god bro just gave up and go play rebel inc instead you suck ass at plague inc,-1,anger,0,-1,anger,0,-1,anger,0
+20,"HMPV is nothing. Like a cold, lasts 2-5 days, and goes away on its own. It is not something to be concerned with.",1,relief,hmpv is nothing like a cold lasts  days and goes away on its own it is not something to be concerned with,1,unemotional,10,1,unemotional,10,1,unemotional,10
+21,The sad stuff about this is most 'internet people' actually miss the pandemic and lockdown. And they would be happy if it happens again.,-1,sad,the sad stuff about this is most internet people actually miss the pandemic and lockdown and they would be happy if it happens again,-1,unemotional,10,-1,sad,7,-1,sad,7
+22,This virus is not new and was first identified in 2001 in the Netherlands.,1,relief,this virus is not new and was first identified in  in the netherlands,0,unemotional,10,1,unemotional,10,1,relief,6
+23,"Every few years there is a new virus that will supposedly cause a pandemic, but only one did so far",-1,disgust,every few years there is a new virus that will supposedly cause a pandemic but only one did so far,0,unemotional,10,0,unemotional,10,-1,unemotional,10
+24,"I mean yeah, it's the internet of course we'll make memes.
+
+And NGL even if the virus spread around it ain't reaching covid levels, people and companies and governments are significantly more used to dealing with lockdowns.",0,unemotional,i mean yeah its the internet of course well make memesand ngl even if the virus spread around it aint reaching covid levels people and companies and governments are significantly more used to dealing with lockdowns,0,unemotional,10,0,unemotional,10,0,unemotional,10
+25,"Aww shit, here we go again",-1,disgust,aww shit here we go again,-1,disgust,1,-1,disgust,1,-1,disgust,1
+26,Hmpv isn't new,0,unemotional,hmpv isnt new,0,unemotional,10,0,unemotional,10,0,unemotional,10
+27,![gif](giphy|j6ZlX8ghxNFRknObVk|downsized),0,unemotional,gifgiphyjzlxghxnfrknobvkdownsized,0,unemotional,10,-1,unemotional,10,-1,unemotional,10
+28,We didn't learn anything from covid,-1,anger,we didnt learn anything from covid,-1,unemotional,10,-1,anger,0,-1,anger,0
+29,"Yes, it is a bloody joke.",-1,disgust,yes it is a bloody joke,-1,unemotional,10,-1,unemotional,10,-1,disgust,1
+30,This virus comes from people with doo doo breath,-1,disgust,this virus comes from people with doo doo breath,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+31,"It’s not a new virus 
+
+That’s why you have a name for it. HMPV. Bc it’s not new.",-1,disgust,its not a new virus thats why you have a name for it hmpv bc its not new,0,unemotional,10,0,unemotional,10,0,unemotional,10
+32,The fuck do you want me to do?,-1,anger,the fuck do you want me to do,-1,anger,0,-1,anger,0,-1,anger,0
+33,"Yes, yes you are a joke to me, because you are a mere common little pshetic virus
+
+I am laughing",0,unemotional,yes yes you are a joke to me because you are a mere common little pshetic virusi am laughing,0,unemotional,10,0,unemotional,10,0,unemotional,10
+34,"Why should we be afraid? It's a common cold and even experts say not to bother worrying about it. Its effects are known to mostly be mild.
+
+Covid was borderline worth the lockdowns it caused; it really was quite lethal in people of poor health and the elderly, and also seemed to randomly be more deadly in healthy people. With that said, I think many people agree now that we may have gone abit far after not reacting quickly enough to quell it before it really got going.
+
+The media is just causing panic, again, for clicks. It's highly unethical and should be against journalistic integrity. But, I guess that integrity went out the window when 24/7 media became a thing.",0,unemotional,why should we be afraid its a common cold and even experts say not to bother worrying about it its effects are known to mostly be mildcovid was borderline worth the lockdowns it caused it really was quite lethal in people of poor health and the elderly and also seemed to randomly be more deadly in healthy people with that said i think many people agree now that we may have gone abit far after not reacting quickly enough to quell it before it really got goingthe media is just causing panic again for clicks its highly unethical and should be against journalistic integrity but i guess that integrity went out the window when  media became a thing,0,unemotional,10,0,unemotional,10,0,unemotional,10
+35,"Chill 2120 is far away, and as we know all big plague outbreaks happen once every 100 years(1720 plague, 1820 cholera, 1920 bird flu, 2020 covid)",1,joy,chill  is far away and as we know all big plague outbreaks happen once every  years plague  cholera  bird flu  covid,0,unemotional,10,1,joy,5,1,joy,5
+36,"Fool me once shame on you, fool me twice shame on meme, fool me thrice... uhhh crap, gna need more meme ideas",0,unemotional,fool me once shame on you fool me twice shame on meme fool me thrice uhhh crap gna need more meme ideas,0,unemotional,10,0,unemotional,10,0,unemotional,10
+37,Not again. Not doing this a second time...,-1,fear,not again not doing this a second time,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+38,"And what are we going to do about it? We have an administration coming in that doesn’t believe in inoculating against health threats. A president who espoused drinking bleach, and trying to illuminate our interiors to kill coronavirus. What a tool. He’s going to take us out of the World Health Organization and cut us off from the rest of the world because that’s what fascists do. 15 million voters didn’t come out in support of a Democratic candidate. But they do support this clown show.",0,unemotional,and what are we going to do about it we have an administration coming in that doesnt believe in inoculating against health threats a president who espoused drinking bleach and trying to illuminate our interiors to kill coronavirus what a tool hes going to take us out of the world health organization and cut us off from the rest of the world because thats what fascists do  million voters didnt come out in support of a democratic candidate but they do support this clown show,0,unemotional,10,0,unemotional,10,0,unemotional,10
+39,"We need to meme every virus going forward. Less we want to be under a 2 week, years long lock down again. Some of you may die. But that's a risk I'm willing to take.",0,unemotional,we need to meme every virus going forward less we want to be under a  week years long lock down again some of you may die but thats a risk im willing to take,0,unemotional,10,0,unemotional,10,0,unemotional,10
+40,"Aren't the risks of a pandemic in both cases (H5N1 and HMPV) low? H5N1 needs a mutation for human-human transmission and countries are already stockpiling vaccines just in case, and HMPV isn't nearly as lethal as Covid and usually mild in healthy adults (which doesn't mean it's not a threat, but compared to how many regular adults were knocked out due to covid its a good sign).",0,unemotional,arent the risks of a pandemic in both cases hn and hmpv low hn needs a mutation for humanhuman transmission and countries are already stockpiling vaccines just in case and hmpv isnt nearly as lethal as covid and usually mild in healthy adults which doesnt mean its not a threat but compared to how many regular adults were knocked out due to covid its a good sign,0,unemotional,10,0,unemotional,10,0,unemotional,10
+41,Gotta admit the covid lockdown was one of my favourite times.. xd,1,joy,gotta admit the covid lockdown was one of my favourite times xd,-1,unemotional,10,-1,joy,5,0,joy,5
+42,I blame the same president that was in office during our 2020 lockdown,0,unemotional,i blame the same president that was in office during our  lockdown,0,unemotional,10,0,unemotional,10,0,unemotional,10
+79,"Just let it go. I will sacrifice myself to this virus. Almost died from covid, might try again as well.
+Maybe some corpo rich bastards will also perish.",-1,sad,just let it go i will sacrifice myself to this virus almost died from covid might try again as wellmaybe some corpo rich bastards will also perish,-1,unemotional,10,-1,sad,7,-1,sad,7
+80,Season 2?,0,unemotional,season,0,unemotional,10,0,unemotional,10,0,unemotional,10
+81,[removed],0,unemotional,removed,0,unemotional,10,0,unemotional,10,0,unemotional,10
+82,Oh goody- I was wondering what the bio-terror manufacturers have been up to after their big hit.,-1,anger,oh goody i was wondering what the bioterror manufacturers have been up to after their big hit,-1,unemotional,10,-1,anger,0,-1,anger,0
+83,The world is so unserious now that if a deadly asteroid was heading towards earth we’d make memes about it as well,-1,disgust,the world is so unserious now that if a deadly asteroid was heading towards earth wed make memes about it as well,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+84,It's basically the flu.,0,unemotional,its basically the flu,0,unemotional,10,0,unemotional,10,0,unemotional,10
+85,"Please, it's bird flu we have to worry about now, not HMPV.",0,fear,please its bird flu we have to worry about now not hmpv,0,unemotional,10,0,fear,3,0,fear,3
+86,Yes virus. Yes you are a joke to me,-1,disgust,yes virus yes you are a joke to me,-1,unemotional,10,-1,unemotional,10,-1,disgust,1
+87,"Hey wait, I saw this about 5 years ago, and everyone shrugged and said it wasn't china's fault.",0,unemotional,hey wait i saw this about  years ago and everyone shrugged and said it wasnt chinas fault,0,unemotional,10,0,unemotional,10,0,unemotional,10
+88,"i might get downvoted or smth for this, but people always say india is so unhygienic when covid, hmpv, sars, etc viruses all originated from china and nobody says anything about that. nothing against china, just doesn’t make much sense",-1,anger,i might get downvoted or smth for this but people always say india is so unhygienic when covid hmpv sars etc viruses all originated from china and nobody says anything about that nothing against china just doesnt make much sense,-1,unemotional,10,-1,anger,0,-1,anger,0
+89,Back to wanking and gaming all day woo hoo !!!,1,joy,back to wanking and gaming all day woo hoo,0,unemotional,10,0,joy,5,1,joy,5
+90,Lock down the world and sink the global economic system over whats a basically a cold and good luck getting the public to trust you again. Classic boy who cried wolf,0,unemotional,lock down the world and sink the global economic system over whats a basically a cold and good luck getting the public to trust you again classic boy who cried wolf,0,unemotional,10,0,unemotional,10,0,unemotional,10
+91,"I'm watching you, Wazowski.",0,unemotional,im watching you wazowski,0,unemotional,10,0,unemotional,10,0,unemotional,10
+92,">Virus: am i a joke to you?
+
+Only until you kill me.",-1,fear,virus am i a joke to youonly until you kill me,-1,unemotional,10,-1,unemotional,10,-1,disgust,1
+93,"Covid was an overblown scam. Why would we fall for that shit twice? Unvaxxed and unfazed, baby!",-1,anger,covid was an overblown scam why would we fall for that shit twice unvaxxed and unfazed baby,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+94,Not again,-1,unemotional,not again,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+95,Mike washouskey,0,unemotional,mike washouskey,0,unemotional,10,0,unemotional,10,0,unemotional,10
+96,"It's just right wingers pumping up the propaganda to try to get people to overreact so in 2 years they can go ""wow those people are dumb"".",-1,anger,its just right wingers pumping up the propaganda to try to get people to overreact so in  years they can go wow those people are dumb,-1,unemotional,10,-1,anger,0,-1,anger,0
+97,"""i've play this game before""😭😭",-1,unemotional,ive play this game before,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+98,You realize almost all recent viral threats have been in some way experimented with gain of function in a lab setting before infecting outside the lab? It’s intentional.,-1,fear,you realize almost all recent viral threats have been in some way experimented with gain of function in a lab setting before infecting outside the lab its intentional,-1,unemotional,10,-1,fear,3,-1,fear,3
+99,"No need to worry guys . It was first discovered in 2001 , it's not a new virus which came into existence. But one thing ,there is no vaccine for HMPV 💀",0,unemotional,no need to worry guys  it was first discovered in   its not a new virus which came into existence but one thing there is no vaccine for hmpv,0,unemotional,10,0,unemotional,10,0,unemotional,10
+100,"I am less than one month away from my trip to Japan... don't screw it up
+
+![gif](giphy|617YFOSF9TvTmyInAj)",-1,fear,i am less than one month away from my trip to japan dont screw it upgifgiphyyfosftvtmyinaj,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+101,![gif](giphy|kqJt1cSSN0DrwwMmY5|downsized),0,unemotional,gifgiphykqjtcssndrwwmmydownsized,0,unemotional,10,0,unemotional,10,0,unemotional,10
+102,"I wouldn't mind another pandemic and lockdown, big chilling",1,enthusiasm,i wouldnt mind another pandemic and lockdown big chilling,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+103,If you read anything about it you know there is nothing to fear,1,relief,if you read anything about it you know there is nothing to fear,1,unemotional,10,1,unemotional,10,1,relief,6
+104,"Bring back coffin dance, that cat vibing Turkish drum man, Among Us, Fall Guys …Squid Games is already back 💀",1,joy,bring back coffin dance that cat vibing turkish drum man among us fall guys squid games is already back,1,unemotional,10,1,joy,5,1,joy,5
+105,It's not a new virus. Been around for 25 years.,0,unemotional,its not a new virus been around for  years,0,unemotional,10,0,unemotional,10,0,unemotional,10
+106,"Well worry but everyone! We elected a president that takes pandemics seriously and professionally so it's chill 
+
+
+
+
+On an unrelated note does anybody know a good therapist?",0,unemotional,well worry but everyone we elected a president that takes pandemics seriously and professionally so its chill on an unrelated note does anybody know a good therapist,0,unemotional,10,0,unemotional,10,0,unemotional,10
+107,"Our leaders were too stupid to do anything last time, other than fuck up small businesses and print money for the wealthy.
+
+Why should we stop life again?",-1,anger,our leaders were too stupid to do anything last time other than fuck up small businesses and print money for the wealthywhy should we stop life again,-1,anger,0,-1,anger,0,-1,anger,0
+108,Bruhh we’re cooked like a jack rabbit on a skillet in the middle of July!,-1,fear,bruhh were cooked like a jack rabbit on a skillet in the middle of july,-1,unemotional,10,-1,fear,3,-1,fear,3
+109,Hold up. Let me upgrade my pc. I can't stay inside with such a potato.,1,enthusiasm,hold up let me upgrade my pc i cant stay inside with such a potato,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+110,We made memes of covid,0,unemotional,we made memes of covid,0,unemotional,10,0,unemotional,10,0,unemotional,10
+111,Cringe not funny,-1,disgust,cringe not funny,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+112,"2020 changed everything, now we know what to do.",1,relief,changed everything now we know what to do,1,unemotional,10,1,relief,6,1,relief,6
+113,Memes are our only coping mechanism against forces beyond our control.,0,unemotional,memes are our only coping mechanism against forces beyond our control,0,unemotional,10,0,unemotional,10,0,unemotional,10
+114,"Well, looks like it's round two",-1,fear,well looks like its round two,-1,unemotional,10,-1,unemotional,10,-1,fear,3
+115,I WILL NEVER FORGIVE THE JAPANESE,-1,anger,i will never forgive the japanese,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+116,anger,0,fear,anger,0,unemotional,10,0,fear,3,0,fear,3
+117,I have it right now it kinda sucked painful cough but over it in 3 days,0,relief,i have it right now it kinda sucked painful cough but over it in  days,0,unemotional,10,0,relief,6,0,relief,6
+118,I want panic until there’s a toilet roll shortage,-1,anger,i want panic until theres a toilet roll shortage,-1,unemotional,10,-1,anger,0,-1,anger,0
+119,Thia vírus is an old vírus. There is no risk to became an epidemic,0,unemotional,thia vrus is an old vrus there is no risk to became an epidemic,0,unemotional,10,0,unemotional,10,0,surprise,8
+120,Looks like virus is going to have a late winter arc boys.,0,unemotional,looks like virus is going to have a late winter arc boys,0,unemotional,10,0,unemotional,10,0,unemotional,10
+121,"As big of a joke as the last one was, yeah",-1,disgust,as big of a joke as the last one was yeah,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+122,"That thing is just a flu, anyone want to stay inside just do it, just fuck off my back.",-1,anger,that thing is just a flu anyone want to stay inside just do it just fuck off my back,-1,unemotional,10,-1,anger,0,-1,anger,0
+123,"“They” will keep tweaking and mutating new viruses until it kills off enough people to keep the population under control. Mainly kill off the immune suppressed and elderly, which is costing all governments more than they can afford.",-1,fear,they will keep tweaking and mutating new viruses until it kills off enough people to keep the population under control mainly kill off the immune suppressed and elderly which is costing all governments more than they can afford,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+124,Definitely calling this one the China Virus,-1,anger,definitely calling this one the china virus,-1,unemotional,10,-1,anger,0,-1,anger,0
+125,Waiting for March...,0,unemotional,waiting for march,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+126,a meme Abt a meme,0,unemotional,a meme abt a meme,0,unemotional,10,0,unemotional,10,-1,unemotional,10
+127,We did this for Covid 19 …………..,0,unemotional,we did this for covid,0,unemotional,10,0,unemotional,10,0,unemotional,10
+128,"Please just kill everyone, we all deserve to die anyway.",-1,sad,please just kill everyone we all deserve to die anyway,-1,unemotional,10,-1,sad,7,-1,sad,7
+129,Some grey hairs as it’s 24 years old.,0,unemotional,some grey hairs as its  years old,0,unemotional,10,0,unemotional,10,0,unemotional,10
+130,We’re cooked like some bacon 😭😂,-1,sad,were cooked like some bacon,-1,unemotional,10,-1,sad,7,-1,sad,7
+131,"That's part of the psyop. 
+
+
+Americans showed the world who (which demographics) you should target if you want your virus to spread quickly.
+
+Just try to target events where people don't take it seriously.",-1,anger,thats part of the psyop americans showed the world who which demographics you should target if you want your virus to spread quicklyjust try to target events where people dont take it seriously,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+132,"I hope we get another one, I got ripped off on the last one and still had to go to work",-1,anger,i hope we get another one i got ripped off on the last one and still had to go to work,-1,unemotional,10,-1,anger,0,-1,anger,0
+133,This is just a common respiratory virus with the same severity as RSV.,0,unemotional,this is just a common respiratory virus with the same severity as rsv,0,unemotional,10,0,unemotional,10,0,unemotional,10
+134,YOU FOOL. I SURVIVED COVID.,0,unemotional,you fool i survived covid,0,unemotional,10,0,unemotional,10,0,unemotional,10
+135,It’s not new,0,unemotional,its not new,0,unemotional,10,0,unemotional,10,0,unemotional,10
+136,Looks like DJT to me! LOL,0,unemotional,looks like djt to me lol,0,unemotional,10,0,unemotional,10,0,unemotional,10
+137,"Will the virus make housing cheaper? How about groceries? If not, big deal.",-1,disgust,will the virus make housing cheaper how about groceries if not big deal,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+138,Why is it always China… also well ain’t that just great,-1,anger,why is it always china also well aint that just great,-1,unemotional,10,-1,anger,0,-1,anger,0
+139,Deja vu,0,unemotional,deja vu,0,unemotional,10,0,unemotional,10,0,unemotional,10
+140,This is what they call... immunity,0,unemotional,this is what they call immunity,0,unemotional,10,0,unemotional,10,0,unemotional,10
+141,Well yea it is a god damn joke. I'm just wondering how come all the new viruses come from china?,-1,disgust,well yea it is a god damn joke im just wondering how come all the new viruses come from china,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+142,Pandemic round 2! Lets gooo! This time lets hope it gets all the geezers I’m congress holding the US back!,-1,anger,pandemic round  lets gooo this time lets hope it gets all the geezers im congress holding the us back,-1,unemotional,10,-1,anger,0,-1,anger,0
+143,"Can I get an apartment, ps5 and be mostly done with college before the next pandemic plz?",0,unemotional,can i get an apartment ps and be mostly done with college before the next pandemic plz,0,unemotional,10,0,unemotional,10,0,unemotional,10
+144,"Literally the only people I'm aware of talking about this are meme subs. The news of all people aren't talking about it and I haven't seen scientists talking about it. Tf are you talking about?
+
+
+Insert someone sending some random link to a tweet ",0,unemotional,literally the only people im aware of talking about this are meme subs the news of all people arent talking about it and i havent seen scientists talking about it tf are you talking aboutinsert someone sending some random link to a tweet,0,unemotional,10,0,unemotional,10,0,unemotional,10
+145,What’s funny is shouldn’t we be way more scared of the chance that the bird flu mutates and becomes airborne?,-1,fear,whats funny is shouldnt we be way more scared of the chance that the bird flu mutates and becomes airborne,-1,unemotional,10,-1,fear,3,-1,fear,3
+146,test failed ok lets do it again...,0,unemotional,test failed ok lets do it again,0,unemotional,10,0,unemotional,10,0,unemotional,10
+147,Sur your forgetting that I ate Flintstones vitamins as a child henceforth I am unkillable,0,unemotional,sur your forgetting that i ate flintstones vitamins as a child henceforth i am unkillable,0,unemotional,10,0,unemotional,10,0,unemotional,10
+148,and somehow Instagram keep recommending me china reels as it's normal 😑,-1,disgust,and somehow instagram keep recommending me china reels as its normal,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+149,"The number of times I've read the ""new virus in China"" headline since Covid is insanely high. The number of times it actually proved to be anything? Zero.",0,unemotional,the number of times ive read the new virus in china headline since covid is insanely high the number of times it actually proved to be anything zero,0,unemotional,10,0,unemotional,10,-1,unemotional,10
+150,Not again I still remember those lockdown days bohot ke liye that phase was great na exams na school but for many it was horrible phase many lost their close ones one of my classmate lost his father my parents were covid positive I still get scared thinking abt those days abhi bohot log kahenge ki wapas se lockdown lg jaye exam cancel hojaye but they don't know how much people will suffer,-1,fear,not again i still remember those lockdown days bohot ke liye that phase was great na exams na school but for many it was horrible phase many lost their close ones one of my classmate lost his father my parents were covid positive i still get scared thinking abt those days abhi bohot log kahenge ki wapas se lockdown lg jaye exam cancel hojaye but they dont know how much people will suffer,-1,unemotional,10,-1,fear,3,-1,fear,3
+151,HMPV is literally just the common cold...,0,unemotional,hmpv is literally just the common cold,0,unemotional,10,0,unemotional,10,0,unemotional,10
+152,"This is a 20yr old virus that has peaked in previous years, simlar to RSV.  Panic is new, the virus is not.",0,unemotional,this is a yr old virus that has peaked in previous years simlar to rsv  panic is new the virus is not,0,unemotional,10,0,unemotional,10,0,unemotional,10
+153,"""H1N5 has entered the chat""",0,unemotional,hn has entered the chat,0,unemotional,10,0,unemotional,10,0,unemotional,10
+154,I see people are already jerking off to the next fear porn session,-1,disgust,i see people are already jerking off to the next fear porn session,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+155,Time to stock up on toilet paper,0,unemotional,time to stock up on toilet paper,0,unemotional,10,0,unemotional,10,0,unemotional,10
+156,Thought we couldn’t say virus’s came from China,-1,disgust,thought we couldnt say viruss came from china,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+157,what happend,0,unemotional,what happend,0,unemotional,10,0,unemotional,10,0,unemotional,10
+158,"Mm, new, totally not fabricated (again), excuse for keeping population occupied with ""justified"" right to oppress people.",-1,anger,mm new totally not fabricated again excuse for keeping population occupied with justified right to oppress people,0,unemotional,10,-1,unemotional,10,-1,unemotional,10
+159,"Yes, common cold, you are a joke",-1,disgust,yes common cold you are a joke,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+160,Maybe it's because COVID was a big joke.,-1,disgust,maybe its because covid was a big joke,-1,unemotional,10,-1,unemotional,10,-1,disgust,1
+161,It's not a new virus. The fact we already know what it is would indicate it's not exactly new.,0,unemotional,its not a new virus the fact we already know what it is would indicate its not exactly new,0,unemotional,10,0,unemotional,10,0,unemotional,10
+162,"Fool me once shame on you, fool me twice….",-1,anger,fool me once shame on you fool me twice,-1,unemotional,10,-1,unemotional,10,-1,anger,0
+163,I mean being afraid does nothing. Atleast making memes makes us laugh 🤷🏽‍♂️,0,unemotional,i mean being afraid does nothing atleast making memes makes us laugh,0,unemotional,10,0,unemotional,10,-1,unemotional,10
+164,There is definitely a fear campaign going on to make people extremely nervous about this virus for no reason. People need to pay attention. This is not a new virus.,0,unemotional,there is definitely a fear campaign going on to make people extremely nervous about this virus for no reason people need to pay attention this is not a new virus,0,unemotional,10,0,unemotional,10,0,unemotional,10
+165,"Yeah nobody is gunna fall for it again. Everyone remembers how governments tried to spin that into total dictatorship. 
+
+A lot of people are going to die questioning the legitimacy of diseases for generations because of the damage done by that.",-1,unemotional,yeah nobody is gunna fall for it again everyone remembers how governments tried to spin that into total dictatorship a lot of people are going to die questioning the legitimacy of diseases for generations because of the damage done by that,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+166,What if the life we live now is the virus 🤔,0,surprise,what if the life we live now is the virus,0,unemotional,10,0,surprise,8,0,surprise,8
+167,"Remember, if the media starts fearmongering, it's trivial in reality.
+
+
+If the media starts saying it definitely isn't a big deal, * that's * when you start worrying.",1,relief,remember if the media starts fearmongering its trivial in realityif the media starts saying it definitely isnt a big deal  thats  when you start worrying,0,unemotional,10,-1,relief,6,-1,relief,6
+168,Every winter.,0,unemotional,every winter,0,unemotional,10,0,unemotional,10,-1,unemotional,10
+169,stop eating authentic shit!,-1,disgust,stop eating authentic shit,-1,disgust,1,-1,disgust,1,-1,disgust,1
+170,Can we get zombies this time 🥹,1,enthusiasm,can we get zombies this time,0,unemotional,10,-1,enthusiasm,2,0,enthusiasm,2
+171,"Viruses and shit suck.  But people need to chill.  Eat properly(chicken noodles soup and plenty of liquids), get rest, etc.  Unless youre unhealthy, most people can survive shit that's not outright AIDS.",0,sympathy,viruses and shit suck  but people need to chill  eat properlychicken noodles soup and plenty of liquids get rest etc  unless youre unhealthy most people can survive shit thats not outright aids,0,unemotional,10,0,sympathy,9,0,sympathy,9
+172,"Being afraid won't help anything, all we can do is wait and see. Gallows humor is a natural response to feeling powerless and coping with difficult situations.",1,relief,being afraid wont help anything all we can do is wait and see gallows humor is a natural response to feeling powerless and coping with difficult situations,-1,unemotional,10,-1,relief,6,-1,relief,6
+173,"Yeah it is a joke at this point we haven't nuked China over the viral attack they perpetrated against the rest of the world in 2020.  And now another pandemic is upon us and where has it started? Oh China again?  HEY CHINA!!! Put the cute little vial down, you obviously will never know what you are doing, and there's no point in trying anymore go back to making cheap junk that will be thrown in the garbage heap in a week.  You were better at that.",-1,anger,yeah it is a joke at this point we havent nuked china over the viral attack they perpetrated against the rest of the world in   and now another pandemic is upon us and where has it started oh china again  hey china put the cute little vial down you obviously will never know what you are doing and theres no point in trying anymore go back to making cheap junk that will be thrown in the garbage heap in a week  you were better at that,-1,unemotional,10,-1,unemotional,10,-1,anger,0
+174,Definitely making sure I get some premium toilet paper so I have currency to trade with,1,enthusiasm,definitely making sure i get some premium toilet paper so i have currency to trade with,1,unemotional,10,1,unemotional,10,1,unemotional,10
+175,😂,1,joy,,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+176,Isn't hmpv the common cold?,0,unemotional,isnt hmpv the common cold,0,unemotional,10,0,unemotional,10,0,unemotional,10
+177,I HAVE PLAYED THESE GAMES BEFORE,0,unemotional,i have played these games before,0,unemotional,10,0,unemotional,10,0,unemotional,10
+178,Not a new virus.,0,unemotional,not a new virus,0,unemotional,10,0,unemotional,10,0,unemotional,10
+179,"Yall please take this seriously. The last time we didn't bill gates said ""next time they'll see"" and he will engineer more vicious virus",-1,fear,yall please take this seriously the last time we didnt bill gates said next time theyll see and he will engineer more vicious virus,-1,unemotional,10,-1,fear,3,-1,fear,3
+180,Ah shit here we go again,-1,disgust,ah shit here we go again,-1,disgust,1,-1,disgust,1,-1,disgust,1
+181,Boy who cried wolf. Response to Covid was so overblown people are either not going to take the next one seriously or are still double-masking daily.,-1,anger,boy who cried wolf response to covid was so overblown people are either not going to take the next one seriously or are still doublemasking daily,-1,unemotional,10,-1,anger,0,-1,anger,0
+182,"""Possible pandemic""
+
+""As of 2016, it was the second most common cause (after respiratory syncytial virus (RSV)) of acute respiratory tract illness in otherwise-healthy children under the age of 5 in a large US outpatient clinic.""
+
+![gif](giphy|B2Rojmkel8EcE)",0,unemotional,possible pandemicas of  it was the second most common cause after respiratory syncytial virus rsv of acute respiratory tract illness in otherwisehealthy children under the age of  in a large us outpatient clinicgifgiphybrojmkelece,0,unemotional,10,0,unemotional,10,0,unemotional,10
+183,What does being afraid serve anyone? Show no fear. Fear is useless.,1,relief,what does being afraid serve anyone show no fear fear is useless,1,unemotional,10,1,relief,6,1,relief,6
+184,Hahahha @eightpancakes you would block me cause you're a complete fucking idiot. Here's my reply since you blocked me. I dont think your life is though that's why you sit on your keyboard talking shit on reddit. Judging by your comments that's all you do is troll to make yourself feel better. Sad sad existence. Bet you can't even afford a house let alone a car in the uk. You probably still live with your mum in her flat because you're still jerking it to fucking pics of the queen. Bet you have no idea how vaccines work other than what some dipshit on the TV told you,-1,anger,hahahha eightpancakes you would block me cause youre a complete fucking idiot heres my reply since you blocked me i dont think your life is though thats why you sit on your keyboard talking shit on reddit judging by your comments thats all you do is troll to make yourself feel better sad sad existence bet you cant even afford a house let alone a car in the uk you probably still live with your mum in her flat because youre still jerking it to fucking pics of the queen bet you have no idea how vaccines work other than what some dipshit on the tv told you,-1,unemotional,10,-1,unemotional,10,-1,anger,0
+185,Can we throw China away yet,-1,anger,can we throw china away yet,-1,unemotional,10,-1,unemotional,10,-1,anger,0
+186,Except it isn't a new pandemic do some research please.,0,unemotional,except it isnt a new pandemic do some research please,0,unemotional,10,0,unemotional,10,0,unemotional,10
+187,"“Instead of being afraid”
+
+Like being scared is going to solve anything",1,relief,instead of being afraidlike being scared is going to solve anything,-1,unemotional,10,-1,relief,6,-1,relief,6
+188,Bruh I'm training to be a first responder rn I do not need this,0,unemotional,bruh im training to be a first responder rn i do not need this,0,unemotional,10,0,unemotional,10,-1,unemotional,10
+189,"Oh, trust me, we're plenty afraid.",-1,fear,oh trust me were plenty afraid,-1,unemotional,10,-1,fear,3,-1,fear,3
+190,"Another vaccine won't hurt, we're already bugged at this point",1,enthusiasm,another vaccine wont hurt were already bugged at this point,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+191,[deleted],0,unemotional,deleted,0,unemotional,10,0,unemotional,10,0,unemotional,10
+192,Are ya guys ready for round two? -God probably,0,surprise,are ya guys ready for round two god probably,0,unemotional,10,0,surprise,8,0,surprise,8
+193,"Until I'm dead, kinda.",-1,fear,until im dead kinda,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+194,![gif](giphy|D71E9uMpHp292),0,unemotional,gifgiphydeumphp,0,unemotional,10,0,unemotional,10,0,unemotional,10
+195,"Ffs, **IT'S NOT NEW.** It's a very common virus",-1,anger,ffs its not new its a very common virus,-1,unemotional,10,-1,anger,0,-1,anger,0
+196,Pufferfish comin for us all,-1,fear,pufferfish comin for us all,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+197,Some one tell the virus to spread quicker I want lockdown back.,1,enthusiasm,some one tell the virus to spread quicker i want lockdown back,1,unemotional,10,1,unemotional,10,1,unemotional,10
+198,"Another day, another virus that’s been around longer than most of us. The media loves a good panic, but let’s remember that this one is just another respiratory virus making its rounds. We’ve dealt with worse and will keep on living.",0,unemotional,another day another virus thats been around longer than most of us the media loves a good panic but lets remember that this one is just another respiratory virus making its rounds weve dealt with worse and will keep on living,0,unemotional,10,0,unemotional,10,0,unemotional,10
+199,Well it's like the 76th one China has pumped out in like the last 6 years weed be more afraid if it didn't happen every other fucking month,-1,anger,well its like the th one china has pumped out in like the last  years weed be more afraid if it didnt happen every other fucking month,-1,anger,0,-1,anger,0,-1,anger,0
+200,We doing another lock down? I'm just going to buy a bidet to circumvent the tp hoarders.,0,unemotional,we doing another lock down im just going to buy a bidet to circumvent the tp hoarders,0,unemotional,10,0,unemotional,10,0,unemotional,10
+201,"NFT ? Crypto ? Bitcoins ? 
+
+Nah toilet paper is where the value will be, I assure you",1,enthusiasm,nft  crypto  bitcoins  nah toilet paper is where the value will be i assure you,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+202,🤣🤣🤣🤣🤣,1,joy,,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+203,Wanna be scientists are already on X with their charts on how the virus isn't harmful and less dangerous than COVID and whatever...,-1,disgust,wanna be scientists are already on x with their charts on how the virus isnt harmful and less dangerous than covid and whatever,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+204,Wait wait i wanna get a new pc please don’t fuck up the prices,-1,fear,wait wait i wanna get a new pc please dont fuck up the prices,-1,unemotional,10,-1,fear,3,-1,fear,3
+205,Wait again?,0,surprise,wait again,0,unemotional,10,0,surprise,8,0,surprise,8
+206,"Every year is the same, they wish to be on lockdown again, even if their memes say otherwise.",0,unemotional,every year is the same they wish to be on lockdown again even if their memes say otherwise,0,unemotional,10,0,unemotional,10,0,unemotional,10
+207,And we’re about to have the worst possible people in charge to handle it,-1,anger,and were about to have the worst possible people in charge to handle it,0,unemotional,10,-1,anger,0,-1,anger,0
+208,I mean its around for 25 years now,0,unemotional,i mean its around for  years now,0,unemotional,10,0,unemotional,10,0,unemotional,10
+209,Scapegoat for the actual terrifying potential imminent bird flu mutations,-1,fear,scapegoat for the actual terrifying potential imminent bird flu mutations,-1,unemotional,10,-1,fear,3,-1,fear,3
+210,"I can't do anything about a virus in china, even If It become a pandemic, Being afraid Will not change anything so the best Cope IS Just make memes about it",1,relief,i cant do anything about a virus in china even if it become a pandemic being afraid will not change anything so the best cope is just make memes about it,-1,unemotional,10,-1,relief,6,-1,relief,6
+211,"Tedros, go! Bark! Go bite! Good boy, now sit!",-1,disgust,tedros go bark go bite good boy now sit,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+212,And with the annoying orange in presidency hes going to ignore it like covid. Except this time we wont be getting any vaccines.,-1,anger,and with the annoying orange in presidency hes going to ignore it like covid except this time we wont be getting any vaccines,0,unemotional,10,0,anger,0,0,anger,0
+213,This crap again? Dont fall for it again or its your own fault.,-1,disgust,this crap again dont fall for it again or its your own fault,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+214,It’s debatable if a virus is alive I really don’t think it would care if we make fun of them,0,unemotional,its debatable if a virus is alive i really dont think it would care if we make fun of them,0,unemotional,10,0,unemotional,10,0,unemotional,10
+215,I will not be afraid of ‘His Majesty’s Piss Virus’,-1,anger,i will not be afraid of his majestys piss virus,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+216,"They say its just a cold, but I’m not taking any chances. Especially if its the type that mutates a lot. 
+
+People tried to downplay Covid when it first dropped too.",-1,fear,they say its just a cold but im not taking any chances especially if its the type that mutates a lot people tried to downplay covid when it first dropped too,-1,unemotional,10,-1,fear,3,-1,fear,3
+217,Does anything good even come out of China?,-1,disgust,does anything good even come out of china,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+218,Abb to addat hoga hai har sal sunne ka,-1,sad,abb to addat hoga hai har sal sunne ka,-1,unemotional,10,-1,sad,7,-1,sad,7
+219,"![gif](giphy|6ILjOfJ1oL7NAc9SQ7)
+
+aw shit, here we go again",-1,disgust,gifgiphyiljofjolnacsqaw shit here we go again,-1,disgust,1,-1,disgust,1,-1,disgust,1
+220,[removed],0,unemotional,removed,0,unemotional,10,0,unemotional,10,0,unemotional,10
+221,LOCKDOWN 2 ELECTRIC BOOGALOO LET'S GO!,1,enthusiasm,lockdown  electric boogaloo lets go,1,unemotional,10,1,unemotional,10,1,unemotional,10
+222,Isnt not a new virus its a particularly bad outbreak of a virus we have known about for decades.,0,unemotional,isnt not a new virus its a particularly bad outbreak of a virus we have known about for decades,0,unemotional,10,0,unemotional,10,0,unemotional,10
+223,…new..????,0,surprise,new,0,unemotional,10,0,unemotional,10,0,unemotional,10
+224,Bring it on. Everyone that wants to hide can hide in their homes. I’ll be out there killing it just like last time.,1,enthusiasm,bring it on everyone that wants to hide can hide in their homes ill be out there killing it just like last time,1,unemotional,10,1,unemotional,10,1,unemotional,10
+225,As an American I only feel bad for the healthcare workers who are going to need to treat racist assholes screaming about their personal freedoms before they kick the bucket.,-1,sympathy,as an american i only feel bad for the healthcare workers who are going to need to treat racist assholes screaming about their personal freedoms before they kick the bucket,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+226,Again?,0,surprise,again,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+227,"Guys, do some actual research HMPV is not a big deal. Wash your hands",0,unemotional,guys do some actual research hmpv is not a big deal wash your hands,0,unemotional,10,0,unemotional,10,0,unemotional,10
+228,Is this Round 2?,0,surprise,is this round,0,unemotional,10,0,unemotional,10,0,fear,3
+229,I mean we did that the first time too,0,unemotional,i mean we did that the first time too,0,unemotional,10,0,unemotional,10,0,unemotional,10
+230,"The world to China: “1 time is funny, 2 times is fucking annoying, no?”",-1,anger,the world to china  time is funny  times is fucking annoying no,-1,anger,0,-1,anger,0,-1,anger,0
+231,Already got the worst flu of my life this year. Made Covid look like a mild coughing fit. Bring it.,1,enthusiasm,already got the worst flu of my life this year made covid look like a mild coughing fit bring it,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+232,What good is being afraid going to do? Might as well make a meme.,1,relief,what good is being afraid going to do might as well make a meme,1,unemotional,10,1,relief,6,1,relief,6
+233,"Other than you know all the deaths, lock down life was dope",1,joy,other than you know all the deaths lock down life was dope,1,unemotional,10,1,joy,5,1,joy,5
+234,That’s all anyone fucking does about anything anymore.,-1,disgust,thats all anyone fucking does about anything anymore,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+235,"""Ah shit here we go again""",-1,disgust,ah shit here we go again,-1,disgust,1,-1,disgust,1,-1,disgust,1
+236,"
+HMPV is a strain of the common cold.",0,unemotional,hmpv is a strain of the common cold,0,unemotional,10,0,unemotional,10,0,unemotional,10
+237,More like a return…,0,unemotional,more like a return,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+238,"I didn't give a shit in 2020, I won't give a shit in 2025",-1,disgust,i didnt give a shit in  i wont give a shit in,-1,disgust,1,-1,disgust,1,-1,disgust,1
+239,I’ve defeated viruses by drinking entire strains under the table <3 #stopfearmongering,1,joy,ive defeated viruses by drinking entire strains under the table  stopfearmongering,1,unemotional,10,1,joy,5,1,joy,5
+240,The amount of misinformation people are ready to share is astounding. Whatever happened to fact checking?,-1,disgust,the amount of misinformation people are ready to share is astounding whatever happened to fact checking,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+241,Pandemic my dick,-1,anger,pandemic my dick,0,unemotional,10,0,anger,0,0,anger,0
+242,"Wait,is that Matt Gaetz?",0,surprise,waitis that matt gaetz,0,unemotional,10,0,surprise,8,0,surprise,8
+243,science has known about this one for years.  it's not new.  just sensationalism.  We should be more concerned about that bird flu strain.,0,unemotional,science has known about this one for years  its not new  just sensationalism  we should be more concerned about that bird flu strain,0,unemotional,10,0,unemotional,10,0,unemotional,10
+244,"If you can’t beat them, meme them",1,enthusiasm,if you cant beat them meme them,0,unemotional,10,0,enthusiasm,2,-1,enthusiasm,2
+245,"you know what this year is already worse than 2024, why not do this? why shouldn't we have a worldwide pandemic? what even are the 2020s?",-1,sad,you know what this year is already worse than  why not do this why shouldnt we have a worldwide pandemic what even are the s,-1,unemotional,10,-1,sad,7,-1,sad,7
+246,lol,1,joy,lol,0,unemotional,10,0,unemotional,10,1,joy,5
+247,Awesome idea!,1,enthusiasm,awesome idea,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+248,[removed],0,unemotional,removed,0,unemotional,10,0,unemotional,10,0,unemotional,10
+249,"Meme feels like propaganda, is the cat out of the bag already?",-1,disgust,meme feels like propaganda is the cat out of the bag already,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+250,"Since covid I'm caring like zero about global pandemics, I don't know why",0,unemotional,since covid im caring like zero about global pandemics i dont know why,0,unemotional,10,0,unemotional,10,0,unemotional,10
+251,"To be honest, I remember the same thing going on pre-COVID.",0,unemotional,to be honest i remember the same thing going on precovid,0,unemotional,10,0,unemotional,10,0,unemotional,10
+252,Time to buy some toilet paper,0,unemotional,time to buy some toilet paper,0,unemotional,10,0,unemotional,10,0,unemotional,10
+253,I played these games before,0,unemotional,i played these games before,0,unemotional,10,0,unemotional,10,0,unemotional,10
+254,At this point you could tell me there is an extinction level asteroid heading straight for earth and it would just be par for the course,-1,fear,at this point you could tell me there is an extinction level asteroid heading straight for earth and it would just be par for the course,-1,unemotional,10,-1,fear,3,-1,fear,3
+255,"If China comes out with another BS virus I vote to NUKE tha goooks fuck that .. you already got everything 2x the price, another “pandemic” and it’s over",-1,anger,if china comes out with another bs virus i vote to nuke tha goooks fuck that  you already got everything x the price another pandemic and its over,-1,anger,0,-1,anger,0,-1,anger,0
+256,not a new virus,0,unemotional,not a new virus,0,unemotional,10,0,unemotional,10,0,unemotional,10
+257,"Oh fuck me sideways not the ""3 weeks without school"" again",-1,disgust,oh fuck me sideways not the  weeks without school again,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+258,Queue the beagle slayer.,0,unemotional,queue the beagle slayer,0,unemotional,10,-1,unemotional,10,-1,unemotional,10
+259,"This is not novel, unlike covid-19.",0,unemotional,this is not novel unlike covid,0,unemotional,10,0,unemotional,10,0,unemotional,10
+260,We've had one global  pandemic ....yes .what about  second pandemic...,0,surprise,weve had one global  pandemic yes what about  second pandemic,0,unemotional,10,0,unemotional,10,0,unemotional,10
+261,"Young people who are not immuno-compromised and will happily take 2 years of paid annual leave make these memes.
+
+I will very likely be designated an essential worker because I work in the CAR-T immunotherapy field and I'm actually useful! 
+
+My colleague who is close to getting fired might get furloughed instead, ironically!!!!!!!!!",1,enthusiasm,young people who are not immunocompromised and will happily take  years of paid annual leave make these memesi will very likely be designated an essential worker because i work in the cart immunotherapy field and im actually useful my colleague who is close to getting fired might get furloughed instead ironically,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+262,I love how 2025 is gearing up to have two pandemics simultaneously.,1,joy,i love how  is gearing up to have two pandemics simultaneously,0,unemotional,10,0,unemotional,10,1,joy,5
+263,You can't have your HMPV until you've finished your bird flu.,0,unemotional,you cant have your hmpv until youve finished your bird flu,0,unemotional,10,0,unemotional,10,0,unemotional,10
+264,Can’t wait for pt 2,1,enthusiasm,cant wait for pt,0,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+265,"Sick, more time to grind in Satisfactory.",1,joy,sick more time to grind in satisfactory,1,unemotional,10,1,joy,5,1,joy,5
+266,"Not a new virus at all, just new that its circulating so much.",0,unemotional,not a new virus at all just new that its circulating so much,0,unemotional,10,0,unemotional,10,0,unemotional,10
+267,Lmao,1,joy,lmao,1,unemotional,10,1,joy,5,1,joy,5
+268,Hmpv common af team,0,unemotional,hmpv common af team,0,unemotional,10,0,unemotional,10,0,unemotional,10
+269,Never again.,-1,fear,never again,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+270,"At least they make memes about it. In 2019 December people would just slip covid outbreaks like a mundane report and very few people like me would check the numbers everyday or know about epidemics. I remember when it reached 1k, 10k, and 100k as individual cases almost day by day but I forgot after 1 year approximately when 1 million already died by it
+
+
+But everyone started to take it seriously after February 2020 when shit spreads worldwide",0,unemotional,at least they make memes about it in  december people would just slip covid outbreaks like a mundane report and very few people like me would check the numbers everyday or know about epidemics i remember when it reached k k and k as individual cases almost day by day but i forgot after  year approximately when  million already died by itbut everyone started to take it seriously after february  when shit spreads worldwide,0,unemotional,10,0,unemotional,10,0,unemotional,10
+271,Yes,0,unemotional,yes,-1,unemotional,10,-1,unemotional,10,0,unemotional,10
+272,Super cereal.,1,joy,super cereal,1,unemotional,10,1,joy,5,1,joy,5
+273,There's a new plague?,0,surprise,theres a new plague,0,unemotional,10,0,surprise,8,0,surprise,8
+274,This virus is mainly affecting only children… somewhere I feel China is coming up with interesting ways to curb their population.. funny..,-1,anger,this virus is mainly affecting only children somewhere i feel china is coming up with interesting ways to curb their population funny,-1,anger,0,-1,anger,0,-1,anger,0
+275,Not Again.,-1,sad,not again,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+276,After sometime it will make meme and laugh. Prevention  is better than cure,1,relief,after sometime it will make meme and laugh prevention  is better than cure,1,unemotional,10,1,relief,6,1,relief,6
+277,We get a new one of these fuckers at the start of every year. Covid was the exception not the rule (at least I hope so),-1,disgust,we get a new one of these fuckers at the start of every year covid was the exception not the rule at least i hope so,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+278,"After COVID, everyone was like ""keklmao""",1,joy,after covid everyone was like keklmao,0,unemotional,10,1,unemotional,10,1,joy,5
+279,"Laboratories in Shanghai made birdflu infect mammals in 2018, people in the world years later. : suprised pikachu face.",0,surprise,laboratories in shanghai made birdflu infect mammals in  people in the world years later  suprised pikachu face,0,unemotional,10,0,surprise,8,0,surprise,8
+280,"It's not new, it's as dangerous as the common cold, stop fear mongering.",-1,disgust,its not new its as dangerous as the common cold stop fear mongering,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+281,This happen with the last pandemic too,0,unemotional,this happen with the last pandemic too,0,unemotional,10,0,unemotional,10,0,anger,0
+282,Well,0,unemotional,well,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+283,![gif](giphy|LPu2xyLiEmeF6xDOPw),0,unemotional,gifgiphylpuxyliemefxdopw,0,unemotional,10,0,unemotional,10,0,unemotional,10
+284,soap sales (again): 📈📈📈📈,0,unemotional,soap sales again,0,unemotional,10,0,unemotional,10,0,unemotional,10
+285,"faster la spread, want to wfh again",1,enthusiasm,faster la spread want to wfh again,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+286,"I doubt an actual pandemic happens. They tend to happen once every 100 years but if we some have another one the next generation is not going to hear the end of it. “I lived there 2 fucking pandemics I don’t wanna hear it, go wash them dish’s”",-1,unemotional,i doubt an actual pandemic happens they tend to happen once every  years but if we some have another one the next generation is not going to hear the end of it i lived there  fucking pandemics i dont wanna hear it go wash them dishs,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+287,"People are overplaying this new thing, we already have herd immunity to it as it has happened before, China is just having a particularly harsher year, just be hygeneic and you will be okay.",1,relief,people are overplaying this new thing we already have herd immunity to it as it has happened before china is just having a particularly harsher year just be hygeneic and you will be okay,0,unemotional,10,1,relief,6,1,relief,6
+288,"There's an antivaxxer about to be in charge of vaccines, what else can we do?",-1,fear,theres an antivaxxer about to be in charge of vaccines what else can we do,0,unemotional,10,0,fear,3,0,fear,3
+289,"Guys who live in Paris. Go down to the catacombs and get the mutated plague pathogen. Then send it to China as a gift, otherwise their kindness should not go unappreciated.",-1,anger,guys who live in paris go down to the catacombs and get the mutated plague pathogen then send it to china as a gift otherwise their kindness should not go unappreciated,-1,anger,0,-1,anger,0,-1,anger,0
+290,"I said it once and I'll say it before. They have to start naming those things appropriately if they want people to be afraid. Who is scared of some random (from the perspective of a normal person) letters and a number? 
+
+But of you say that a new virus called ""scarlet throat shredder"" appears you bet your ass people will pay attention",0,fear,i said it once and ill say it before they have to start naming those things appropriately if they want people to be afraid who is scared of some random from the perspective of a normal person letters and a number but of you say that a new virus called scarlet throat shredder appears you bet your ass people will pay attention,0,unemotional,10,0,fear,3,0,fear,3
+291,"china again, it's always china",-1,anger,china again its always china,-1,unemotional,10,-1,anger,0,-1,anger,0
+292,Please not another pandemic 🥲,-1,sad,please not another pandemic,0,unemotional,10,0,unemotional,10,0,unemotional,10
+293,You can kill everything on earth before I wear a stupid mask again or get bullied about vaccines.,-1,anger,you can kill everything on earth before i wear a stupid mask again or get bullied about vaccines,-1,unemotional,10,-1,unemotional,10,-1,fear,3
+294,"In case yall thought we were fine because HMPV is new, prepare for the avian flu! H5N1 is the real deal babyyyy!",1,enthusiasm,in case yall thought we were fine because hmpv is new prepare for the avian flu hn is the real deal babyyyy,0,unemotional,10,0,enthusiasm,2,0,enthusiasm,2
+295,"Wait, let me survive my university exams first 🥲🥲",0,fear,wait let me survive my university exams first,0,unemotional,10,0,fear,3,0,fear,3
+296,Freedom is more important. Lockdown go-to hell.,-1,anger,freedom is more important lockdown goto hell,-1,unemotional,10,-1,anger,0,-1,anger,0
+297,Depends. Is the virus starting in a lab again this time?,0,unemotional,depends is the virus starting in a lab again this time,0,unemotional,10,0,unemotional,10,0,unemotional,10
+298,![gif](giphy|6ILjOfJ1oL7NAc9SQ7),0,unemotional,gifgiphyiljofjolnacsq,0,unemotional,10,-1,unemotional,10,-1,unemotional,10
+299,"Well, I guess it’s either we cry or laugh about it. And many people are just choosing to laugh about it for now. I suppose deep down a lot of folks are also worried about a possible new pandemic and a sense of humor is a way to cope. Let’s just do our best to stay safe and hope for the best that it won’t spread worldwide again.",1,relief,well i guess its either we cry or laugh about it and many people are just choosing to laugh about it for now i suppose deep down a lot of folks are also worried about a possible new pandemic and a sense of humor is a way to cope lets just do our best to stay safe and hope for the best that it wont spread worldwide again,1,unemotional,10,1,relief,6,1,relief,6
+300,people are scared of anything these days,-1,disgust,people are scared of anything these days,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+301,Bro I would love a new lock down,1,joy,bro i would love a new lock down,1,unemotional,10,1,joy,5,1,joy,5
+302,"why the fuck do they keep making new viruses? new rule, anyone who goes out of their way to create new viruses or alter existing ones to be more dangerous, you get to watch the sun rise on your city at 11pm.",-1,anger,why the fuck do they keep making new viruses new rule anyone who goes out of their way to create new viruses or alter existing ones to be more dangerous you get to watch the sun rise on your city at pm,0,unemotional,10,-1,anger,0,-1,anger,0
+303,Again?? And in China as well. Oh come on 😭 We just barely recovered from covid bruh.,-1,unemotional,again and in china as well oh come on  we just barely recovered from covid bruh,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+304,I didn’t fall for it in 2019 and I am not going to fall for it now.,0,unemotional,i didnt fall for it in  and i am not going to fall for it now,0,unemotional,10,0,unemotional,10,0,unemotional,10
+305,"Relax...
+HMPV is not new and not life-threatening when treated correctly. It's the second most common cause of respiratory problems for about 10 years now.",1,relief,relaxhmpv is not new and not lifethreatening when treated correctly its the second most common cause of respiratory problems for about  years now,0,unemotional,10,1,unemotional,10,1,unemotional,10
+306,Is this China virus gonna be as good as the first China virus?,0,surprise,is this china virus gonna be as good as the first china virus,0,unemotional,10,0,surprise,8,0,surprise,8
+307,"We can get a new virus, but we can't get new jobs. Yeah I see why people don't take this seriously.",-1,anger,we can get a new virus but we cant get new jobs yeah i see why people dont take this seriously,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+308,Again?,-1,surprise,again,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+309,Same as with covid,0,unemotional,same as with covid,0,unemotional,10,0,unemotional,10,0,unemotional,10
+310,"If evolution taught us anything, this one’s gonna be worse",-1,fear,if evolution taught us anything this ones gonna be worse,-1,unemotional,10,-1,fear,3,-1,fear,3
+311,"I mean, how could to possibly get any worse",-1,fear,i mean how could to possibly get any worse,-1,unemotional,10,-1,fear,3,-1,fear,3
+312,"![gif](giphy|p7ESzgUi7li93Hxjte|downsized)
+
+I can’t do this again",-1,fear,gifgiphypeszguilihxjtedownsizedi cant do this again,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+313,Shit,-1,disgust,shit,-1,disgust,1,-1,disgust,1,-1,disgust,1
+314,Its just a flu get some flu meds in ya a quick scran and a pint of water followed with a nap n youll be reet,0,unemotional,its just a flu get some flu meds in ya a quick scran and a pint of water followed with a nap n youll be reet,0,unemotional,10,0,unemotional,10,0,unemotional,10
+315,It ain't started in china bro. It already existed since 2002. It's just exploded in china recently. Doesn't mean it's from china or started in china.,0,unemotional,it aint started in china bro it already existed since  its just exploded in china recently doesnt mean its from china or started in china,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+316,And I learn of this through a meme post on Reddit??,0,surprise,and i learn of this through a meme post on reddit,0,unemotional,10,0,surprise,8,0,surprise,8
+317,"HMPV isn't new, and the infection rates are increasing alongside other respiratory viruses, as you would expect to see during winter, everything is normal.",0,unemotional,hmpv isnt new and the infection rates are increasing alongside other respiratory viruses as you would expect to see during winter everything is normal,0,unemotional,10,0,unemotional,10,0,unemotional,10
+318,"Yes, anything the news says to be afraid of is a joke to me.",-1,disgust,yes anything the news says to be afraid of is a joke to me,-1,unemotional,10,-1,unemotional,10,-1,disgust,1
+319,Isn't that what happened to C19 too? IIRC we were mocking it up until locmdowns,0,unemotional,isnt that what happened to c too iirc we were mocking it up until locmdowns,0,unemotional,10,0,unemotional,10,0,unemotional,10
+320,Hopefully lockdown 2 will happen.,1,enthusiasm,hopefully lockdown  will happen,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+321,We did the same thing last time,0,unemotional,we did the same thing last time,0,unemotional,10,0,unemotional,10,0,unemotional,10
+322,Iin Biden America we arent afraid,1,relief,iin biden america we arent afraid,1,unemotional,10,1,relief,6,1,relief,6
+323,I HAVE PLAYED THESE GAMES BEFORE!!!!,0,unemotional,i have played these games before,0,unemotional,10,0,unemotional,10,0,unemotional,10
+324,Yes. Yes u are.,-1,anger,yes yes u are,-1,unemotional,10,-1,unemotional,10,-1,anger,0
+325,Guys I ordered something recently from China. Don't scare me like that,-1,fear,guys i ordered something recently from china dont scare me like that,-1,unemotional,10,-1,unemotional,10,-1,anger,0
+326,I have played theese games before 🗣🗣🗣,0,unemotional,i have played theese games before,0,unemotional,10,0,unemotional,10,0,unemotional,10
+327,"Oh shit, here we go again ahh moment",-1,disgust,oh shit here we go again ahh moment,-1,unemotional,10,-1,unemotional,10,-1,disgust,1
+328,Lmao,1,joy,lmao,1,unemotional,10,1,joy,5,1,joy,5
+329,You sure you gonna survive?,0,surprise,you sure you gonna survive,0,unemotional,10,0,surprise,8,0,surprise,8
+330,"Get a PC, laptops only go so far",0,unemotional,get a pc laptops only go so far,-1,unemotional,10,-1,unemotional,10,-1,anger,0
+331,"Don't worry, it's not a new virus.",1,relief,dont worry its not a new virus,0,unemotional,10,0,unemotional,10,1,relief,6
+332,Omg same,0,unemotional,omg same,0,unemotional,10,0,unemotional,10,0,unemotional,10
+333,Don't buy a laptop 🙏,0,unemotional,dont buy a laptop,0,unemotional,10,0,unemotional,10,0,unemotional,10
+334,Why a laptop? You don’t need the portability. Build a tower!,0,unemotional,why a laptop you dont need the portability build a tower,0,unemotional,10,0,unemotional,10,0,unemotional,10
+335,Lenovo LOQ is a good choice if you're budget minded. I have it no regrets. Better than the Acer Nitro I used to have.,1,enthusiasm,lenovo loq is a good choice if youre budget minded i have it no regrets better than the acer nitro i used to have,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+336,military recruiter: hello there,0,unemotional,military recruiter hello there,0,unemotional,10,-1,unemotional,10,-1,unemotional,10
+337,"No worries, this one mostly kills kids under five.",0,fear,no worries this one mostly kills kids under five,-1,unemotional,10,-1,fear,3,-1,fear,3
+338,ILY bro. It’s ok to not care but I care about you.,1,sympathy,ily bro its ok to not care but i care about you,1,unemotional,10,1,sympathy,9,1,sympathy,9
+339,"Seriously, at this point either it's WW3 or a virus, and these days I kinda think we as a species need one or the other to maybe wake up to moving forward as a species.",-1,fear,seriously at this point either its ww or a virus and these days i kinda think we as a species need one or the other to maybe wake up to moving forward as a species,-1,unemotional,10,-1,fear,3,-1,fear,3
+340,Agreed I don’t feel like I have a future.,-1,sad,agreed i dont feel like i have a future,-1,unemotional,10,-1,sad,7,-1,sad,7
+341,"Imma show this to my dad, he's not gonna believe it lol",0,surprise,imma show this to my dad hes not gonna believe it lol,0,unemotional,10,0,surprise,8,0,surprise,8
+342,"This really should be the top comment. People are trying to sneak the idea that ""it's a new virus"" through memes, but it's not. Just as your comment states. Thanks for doing the good work.",1,relief,this really should be the top comment people are trying to sneak the idea that its a new virus through memes but its not just as your comment states thanks for doing the good work,1,unemotional,10,1,relief,6,1,relief,6
+343,Dammit...,-1,anger,dammit,-1,unemotional,10,-1,anger,0,-1,anger,0
+344,"Thank you for this, finally some reasonable explanation.",1,relief,thank you for this finally some reasonable explanation,1,unemotional,10,1,relief,6,1,relief,6
+345,Facts make it hard to hate Chinese people for fake internet points though,1,relief,facts make it hard to hate chinese people for fake internet points though,0,unemotional,10,0,relief,6,-1,relief,6
+346,"Tbf the Coronavirus wasn't new either, actually none of them are. Viruses have been around longer than we have. What matters is their mutations.",0,unemotional,tbf the coronavirus wasnt new either actually none of them are viruses have been around longer than we have what matters is their mutations,0,unemotional,10,0,unemotional,10,0,unemotional,10
+347,What about the H5N1? Any news on that one?,0,unemotional,what about the hn any news on that one,0,unemotional,10,0,unemotional,10,0,unemotional,10
+348,[deleted],0,unemotional,deleted,0,unemotional,10,0,unemotional,10,0,unemotional,10
+349,Thanks. Came here to say this.,1,joy,thanks came here to say this,1,unemotional,10,1,joy,5,1,joy,5
+350,"I was about to say lol, HMPV ain't new.",0,unemotional,i was about to say lol hmpv aint new,0,unemotional,10,0,unemotional,10,0,unemotional,10
+351,"Came here to re-re-re-re-post this fact but glad to see someone beat me to it. Now, off to Facebook to see how much toilet paper I need to hoard due to the coming plague manufactured in China by Soros-backed illegal immigrants. God I'm so tired of this timeline.",-1,anger,came here to rerererepost this fact but glad to see someone beat me to it now off to facebook to see how much toilet paper i need to hoard due to the coming plague manufactured in china by sorosbacked illegal immigrants god im so tired of this timeline,0,anger,0,0,anger,0,-1,anger,0
+352,">is NOT a new virus
+
+We've had seasonal coronavirus for decades as well, rsv, rhino virus, ev, and influenza. 
+
+It's when a strain decides to be all Novel and strain of interest that things get spicy. 
+
+We have annual flu seasons, and it's pretty standard fair - and then we get exciting years like 1918.",0,unemotional,is not a new virusweve had seasonal coronavirus for decades as well rsv rhino virus ev and influenza its when a strain decides to be all novel and strain of interest that things get spicy we have annual flu seasons and its pretty standard fair  and then we get exciting years like,0,unemotional,10,0,unemotional,10,0,unemotional,10
+353,Upvote this. Downvote the post. Misinformation or at least dramatizing unnecessarily needs to stop.,0,enthusiasm,upvote this downvote the post misinformation or at least dramatizing unnecessarily needs to stop,0,unemotional,10,0,enthusiasm,2,0,enthusiasm,2
+354,"I did read slightly about the chinese case.
+
+They have more automatic testing when it comes to flu. As we know, these viruses infect people to people so they, unsurprisingly, find some virus is infecting more than some others. And yes it happens more in every country in winter, what a shocker. But it all comes down to their testing. We don't do these tests, so it's just a ""flu"" in western countries.
+
+Also they have less cases than last year. 
+
+All a big nothing burger.",1,relief,i did read slightly about the chinese casethey have more automatic testing when it comes to flu as we know these viruses infect people to people so they unsurprisingly find some virus is infecting more than some others and yes it happens more in every country in winter what a shocker but it all comes down to their testing we dont do these tests so its just a flu in western countriesalso they have less cases than last year all a big nothing burger,1,unemotional,10,1,relief,6,1,relief,6
+355,Came here to say this.,1,joy,came here to say this,-1,unemotional,10,1,joy,5,1,joy,5
+356,I had HMPV right before Covid hit. I am a first responder so it was priming me for the next 2 or 3 bouts with Covid that I inevitably caught while on the job.,0,unemotional,i had hmpv right before covid hit i am a first responder so it was priming me for the next  or  bouts with covid that i inevitably caught while on the job,0,unemotional,10,0,unemotional,10,0,unemotional,10
+357,"It alternates every few years with PIV and enterovirus, showing up more often than others alongside flu and rsv. 
+
+They're all mostly nothing to write home about, causing mostly just a cold. Tho I still remember that year we had a wave of enterovirus start early and then saw an uptick in linked GBS 
+
+I think people have just discovered that there are, in fact, other respiratory viruses other than flu and """"the common cold"""" and look out for it more often now. 
+
+I have just told my friends to stop asking if x respiratory virus in the news that weeks is gonna be the ""next covid"" 
+
+I'm still not sure people even realise coronaviruses aren't new, but it's not a discussion I want to have. Last coronavirus pandemic, pre cov19, was a lil over 100  years ago and is the same class as SARS, MERS, and COV so it's annoyed me from the start they just gave covid a whole ass new name. It's a beta coronavirus, and the last coronavirus to cause a pandemic is, in fact, still in circulation today and showed up every year during winter months alongside three other seasonal coronaviruses and tens of other super common seasonal respiratory viruses 
+
+Idky I even engaged in this post 😂",1,joy,it alternates every few years with piv and enterovirus showing up more often than others alongside flu and rsv theyre all mostly nothing to write home about causing mostly just a cold tho i still remember that year we had a wave of enterovirus start early and then saw an uptick in linked gbs i think people have just discovered that there are in fact other respiratory viruses other than flu and the common cold and look out for it more often now i have just told my friends to stop asking if x respiratory virus in the news that weeks is gonna be the next covid im still not sure people even realise coronaviruses arent new but its not a discussion i want to have last coronavirus pandemic pre cov was a lil over   years ago and is the same class as sars mers and cov so its annoyed me from the start they just gave covid a whole ass new name its a beta coronavirus and the last coronavirus to cause a pandemic is in fact still in circulation today and showed up every year during winter months alongside three other seasonal coronaviruses and tens of other super common seasonal respiratory viruses idky i even engaged in this post,0,unemotional,10,1,unemotional,10,1,joy,5
+358,Can we signal boost this please? I feel a lot more people need to hear it.,1,enthusiasm,can we signal boost this please i feel a lot more people need to hear it,-1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+359,"Ayo mods, pin this post right here",1,enthusiasm,ayo mods pin this post right here,0,unemotional,10,0,enthusiasm,2,0,enthusiasm,2
+360,"Thank you for being a rational voice. My now two and a half year old son caught HMPV when he was six months old. It was scary and awful as a parent, but the ER doctor was fairly unconcerned and not surprised to find a daycare kid had contracted HMPV.",1,sympathy,thank you for being a rational voice my now two and a half year old son caught hmpv when he was six months old it was scary and awful as a parent but the er doctor was fairly unconcerned and not surprised to find a daycare kid had contracted hmpv,1,unemotional,10,1,sympathy,9,1,sympathy,9
+361,"It feels like every year or so there is a spike in fear over some ""new"" disease. Even way before COVID. There was zika, ebola, etc. and it rarely turns into anything serious. I even ignored covid until it really started to spike in late February and March. Wish they'd stop sensationalizing new diseases so real threats stand out more",-1,anger,it feels like every year or so there is a spike in fear over some new disease even way before covid there was zika ebola etc and it rarely turns into anything serious i even ignored covid until it really started to spike in late february and march wish theyd stop sensationalizing new diseases so real threats stand out more,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+362,People spreading unfounded fear is purposeful. They do not care if it is true. Disinformation was king during Covid and at least in America a chunk of the population are rejecting reality and science along with it.,-1,disgust,people spreading unfounded fear is purposeful they do not care if it is true disinformation was king during covid and at least in america a chunk of the population are rejecting reality and science along with it,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+363,"Thank you, came to say this. It’s been a thing since 2001. I had a patient the other day with it at my hospital. Similar to a cold, I was told. Patient was elderly and it didn’t seem to negatively affect her too much and she wasn’t in good shape to begin with. All before this “pandemic” talk started happening.",1,relief,thank you came to say this its been a thing since  i had a patient the other day with it at my hospital similar to a cold i was told patient was elderly and it didnt seem to negatively affect her too much and she wasnt in good shape to begin with all before this pandemic talk started happening,0,unemotional,10,0,unemotional,10,0,unemotional,10
+364,The WHO said that the increase in infections (along with several other respiratory viruses) are what they'd expect to see during the winter.,0,unemotional,the who said that the increase in infections along with several other respiratory viruses are what theyd expect to see during the winter,0,unemotional,10,0,unemotional,10,0,unemotional,10
+365,Three days late but I think it’s important to mention that this is purely anti-Chinese sentiment/Sinophobia. The reason we’re hearing about this is because in China they have a more effective disease surveillance system than in America - the reason people won’t shut up about it is because both sides in America benefit from spreading anti-Chinese sentiment,-1,anger,three days late but i think its important to mention that this is purely antichinese sentimentsinophobia the reason were hearing about this is because in china they have a more effective disease surveillance system than in america  the reason people wont shut up about it is because both sides in america benefit from spreading antichinese sentiment,-1,anger,0,-1,anger,0,-1,anger,0
+366,"It could be a mutation, and global pandemics usually are local first.",0,unemotional,it could be a mutation and global pandemics usually are local first,0,unemotional,10,0,unemotional,10,0,unemotional,10
+367,So was Corona Virus. It was a common cause for common cold after rhinovirus and some other viruses. but mutations made it hard to control. Same thing could be going on with this one too.,0,unemotional,so was corona virus it was a common cause for common cold after rhinovirus and some other viruses but mutations made it hard to control same thing could be going on with this one too,0,unemotional,10,0,unemotional,10,0,unemotional,10
+368,![gif](giphy|DwXOS8RqHocEM),0,unemotional,gifgiphydwxosrqhocem,0,unemotional,10,0,unemotional,10,0,unemotional,10
+369,Just a few years old,0,unemotional,just a few years old,0,unemotional,10,0,unemotional,10,0,unemotional,10
+370,"After the lockdown ends,
+
+Gamers: Damn, lockdown ended yet no GTA VI",1,enthusiasm,after the lockdown endsgamers damn lockdown ended yet no gta vi,-1,unemotional,10,-1,enthusiasm,2,-1,enthusiasm,2
+371,Covids precursors were indentified with 2003 sars epidemic but i wouldn't be scared with this regardless,1,relief,covids precursors were indentified with  sars epidemic but i wouldnt be scared with this regardless,1,unemotional,10,1,relief,6,1,relief,6
+372,For real. My daughter had human metapneumovirus a couple years ago. We live in the US. It’s similar to RSV or a severe cold,0,sympathy,for real my daughter had human metapneumovirus a couple years ago we live in the us its similar to rsv or a severe cold,0,unemotional,10,0,sympathy,9,0,sympathy,9
+373,"Don't worry. This virus has been in the US and Europe for years. It's basically just any other respiratory virus. If you're not old, young, or immunocompromised, you'll be fine, which is the same with common flus and colds.
+
+Chances are the western world has had a bunch of cases this winter and no one has tested because cases just look like regular flus or colds. This isn't that big a deal.",1,relief,dont worry this virus has been in the us and europe for years its basically just any other respiratory virus if youre not old young or immunocompromised youll be fine which is the same with common flus and coldschances are the western world has had a bunch of cases this winter and no one has tested because cases just look like regular flus or colds this isnt that big a deal,1,unemotional,10,1,relief,6,1,relief,6
+374,I really wish we get into another pandemic. I hate socializing with people,1,enthusiasm,i really wish we get into another pandemic i hate socializing with people,0,unemotional,10,1,unemotional,10,1,enthusiasm,2
+375,[removed],0,unemotional,removed,0,unemotional,10,0,unemotional,10,0,unemotional,10
+376,"Because they’re losers, and like it when it’s societally acceptable to behave in the same pathetic ways as they do.",-1,disgust,because theyre losers and like it when its societally acceptable to behave in the same pathetic ways as they do,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+377,"My iPhone’s affordability, which is good enough for me.",1,joy,my iphones affordability which is good enough for me,1,unemotional,10,1,joy,5,1,joy,5
+378,"Well, in this case, they're not contributing a new virus & OP & everyone believing him are idiots. This virus has been identified for well over 20 years.",-1,anger,well in this case theyre not contributing a new virus  op  everyone believing him are idiots this virus has been identified for well over  years,-1,unemotional,10,-1,anger,0,-1,anger,0
+379,This virus was first identified in the Netherlands. This is a European virus.,0,unemotional,this virus was first identified in the netherlands this is a european virus,0,unemotional,10,-1,unemotional,10,0,unemotional,10
+380,Wouldn’t surprise me if people already buying 200 rolls and plenty of handwash.,0,unemotional,wouldnt surprise me if people already buying  rolls and plenty of handwash,0,unemotional,10,0,unemotional,10,0,unemotional,10
+381,Well if I spend my time at home gaming all day and not getting out then sure I'll be safe,1,relief,well if i spend my time at home gaming all day and not getting out then sure ill be safe,1,unemotional,10,1,relief,6,1,relief,6
+382,"Yeah, COVID wasn't as bad as it could be because it had like a 1% mortality rate. If something hits with a 10% mortality rate, or 20%, it won't be a nice isolation like it was during COVID, it'll be more like the movie Contagion.",-1,fear,yeah covid wasnt as bad as it could be because it had like a  mortality rate if something hits with a  mortality rate or  it wont be a nice isolation like it was during covid itll be more like the movie contagion,-1,unemotional,10,-1,fear,3,-1,fear,3
+383,"Either they get to game, or it's not their problem anymore, win-win honestly.",1,enthusiasm,either they get to game or its not their problem anymore winwin honestly,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+384,"Nobody lives forever, your Death is not in your Hand. I was close few times,i pray & i get used to the Idea never Wake up. Stay & Think Positive,Always,thats the Trick 👍",1,relief,nobody lives forever your death is not in your hand i was close few timesi pray  i get used to the idea never wake up stay  think positivealwaysthats the trick,1,unemotional,10,1,relief,6,1,relief,6
+385,"Either I do and I get to slink in my gaming room for months 
+
+Or I die and be free from a virus ridden hellscape that will probably get worse because capitalists will do the same as last time and crank prices up again
+
+Frankly either option works",1,enthusiasm,either i do and i get to slink in my gaming room for months or i die and be free from a virus ridden hellscape that will probably get worse because capitalists will do the same as last time and crank prices up againfrankly either option works,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+386,That’s right they go anywhere even the comfort of your own bedroom,0,unemotional,thats right they go anywhere even the comfort of your own bedroom,0,unemotional,10,0,unemotional,10,0,unemotional,10
+387,"It's about having the right tool for the job.
+
+Hardcore gamer who wants the full experience with great cost effectiveness? Tower PC.
+
+Casual gamer who wants the comfort of carrying the thing anywhere, be it the sofa in their home or to their friend's place, and doesn't mind the concessions that come with that? Laptop's just fine.
+
+I'm the former category but I can absolutely see the merits of the latter.",0,unemotional,its about having the right tool for the jobhardcore gamer who wants the full experience with great cost effectiveness tower pccasual gamer who wants the comfort of carrying the thing anywhere be it the sofa in their home or to their friends place and doesnt mind the concessions that come with that laptops just fineim the former category but i can absolutely see the merits of the latter,0,unemotional,10,0,unemotional,10,0,unemotional,10
+388,And a pretty weak old virus at that. Just mild cold-like symptoms. The internet can be a silly place sometimes.,1,relief,and a pretty weak old virus at that just mild coldlike symptoms the internet can be a silly place sometimes,1,unemotional,10,1,relief,6,1,relief,6
+389,And yeah I need good internet also and i should get paid monthly while at home,1,unemotional,and yeah i need good internet also and i should get paid monthly while at home,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+390,They'd accept a lazy ass like me?,0,unemotional,theyd accept a lazy ass like me,0,unemotional,10,0,unemotional,10,0,unemotional,10
+391,I said kill not work to the bone for another's interests then kill.,-1,anger,i said kill not work to the bone for anothers interests then kill,-1,unemotional,10,-1,anger,0,-1,anger,0
+392,Yeah but that would require me to become physically fit and get basically tortured In basic training so I’m good,-1,disgust,yeah but that would require me to become physically fit and get basically tortured in basic training so im good,0,unemotional,10,0,disgust,1,-1,disgust,1
+393,redbull yt video team: hello there,1,joy,redbull yt video team hello there,1,unemotional,10,1,joy,5,1,joy,5
+394,"Hello Mr recruiter, what happens if I'm too lazy for do almost anything and only want to lay around? I mean... I don't want to run or shit like that, but I can think of ways to kill people or maybe mechanic things, can you host me and pay me?",0,unemotional,hello mr recruiter what happens if im too lazy for do almost anything and only want to lay around i mean i dont want to run or shit like that but i can think of ways to kill people or maybe mechanic things can you host me and pay me,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+395,Thanks mate love you too,1,joy,thanks mate love you too,1,unemotional,10,1,joy,5,1,joy,5
+396,I wouldn’t believe you either if some reddit comment is what you show me as proof of anything.,-1,anger,i wouldnt believe you either if some reddit comment is what you show me as proof of anything,-1,anger,0,-1,anger,0,-1,anger,0
+397,"Well I guess the ""smart"" chess set I bought back in the lockdown chess-boom can continue gathering dust then",0,unemotional,well i guess the smart chess set i bought back in the lockdown chessboom can continue gathering dust then,0,unemotional,10,0,unemotional,10,0,unemotional,10
+398,"Coronaviruses existed before. COVID-19 did not exist before 2019, hence the name. The coronaviruses that did exist before either didn’t affect humans or weren’t very transmissible",0,unemotional,coronaviruses existed before covid did not exist before  hence the name the coronaviruses that did exist before either didnt affect humans or werent very transmissible,0,unemotional,10,0,unemotional,10,0,unemotional,10
+399,"It was originally called ""2019-novel coronavirus"", what are you talking about? Do you mean the overall group of coronaviruses? Those aren't new as a class, but the virus that started in Wuhan was new.",0,unemotional,it was originally called novel coronavirus what are you talking about do you mean the overall group of coronaviruses those arent new as a class but the virus that started in wuhan was new,0,unemotional,10,0,unemotional,10,0,unemotional,10
+400,"That's the same logic as ""2025 Toyota Camry isn't new. Cars have been around for a hundred years now!""",0,surprise,thats the same logic as  toyota camry isnt new cars have been around for a hundred years now,0,unemotional,10,0,surprise,8,0,surprise,8
+401,"Few minutes to midnight but we're still fine. Besides, we've already have vaccines developed against that one for a while now.",1,enthusiasm,few minutes to midnight but were still fine besides weve already have vaccines developed against that one for a while now,1,unemotional,10,1,unemotional,10,1,unemotional,10
+402,Discovered in 2001 and traces back to 50 years ago,0,unemotional,discovered in  and traces back to  years ago,0,unemotional,10,0,unemotional,10,0,unemotional,10
+403,"Next lockdown in 2030 starts: Being lockdown with GTA 6, Damn.",-1,fear,next lockdown in  starts being lockdown with gta  damn,-1,unemotional,10,-1,fear,3,-1,fear,3
+404,"Precursors yes, but this one hasn't really changed all that much. You can ofcourse get pretty sick from it, and i believe its particularly a bad one for young kids, but there's established treatments for it that still work. Or work as well as they've always done, no treatment is ever a guarantee ofcourse",1,sympathy,precursors yes but this one hasnt really changed all that much you can ofcourse get pretty sick from it and i believe its particularly a bad one for young kids but theres established treatments for it that still work or work as well as theyve always done no treatment is ever a guarantee ofcourse,1,unemotional,10,1,sympathy,9,1,sympathy,9
+405,I don't hate socializing with people but the pandemic times were good to me.,0,unemotional,i dont hate socializing with people but the pandemic times were good to me,0,unemotional,10,0,unemotional,10,0,unemotional,10
+406,I have this thought every time I get stuck in traffic,0,unemotional,i have this thought every time i get stuck in traffic,0,unemotional,10,0,unemotional,10,0,unemotional,10
+407,The only 2 times I had girlfriends were actually during the pandemic.,1,surprise,the only  times i had girlfriends were actually during the pandemic,1,unemotional,10,1,surprise,8,1,surprise,8
+408,"Then just don't. You don't need a pandemic to force you to stay home and not socialize. Just do your work and go home. People probably won't like you very much, but you don't want to socialize anyways so that should be fine.",-1,anger,then just dont you dont need a pandemic to force you to stay home and not socialize just do your work and go home people probably wont like you very much but you dont want to socialize anyways so that should be fine,-1,unemotional,10,-1,anger,0,-1,anger,0
+409,"Here, several wildlife species had a population boom during covid. Something wasn't killing as many of them...",-1,surprise,here several wildlife species had a population boom during covid something wasnt killing as many of them,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+410,What if the pathogen is ON the box for the gaming notebook and that is how the pathogen gets here?,-1,fear,what if the pathogen is on the box for the gaming notebook and that is how the pathogen gets here,-1,unemotional,10,-1,fear,3,1,fear,3
+411,Out in the woods with FO internet. Let’s go!,0,unemotional,out in the woods with fo internet lets go,0,unemotional,10,-1,unemotional,10,-1,unemotional,10
+412,"Bird flus right at 50%, i am terrified of when that makes its first human to human transmission, since it's contagious as hell.",-1,fear,bird flus right at  i am terrified of when that makes its first human to human transmission since its contagious as hell,-1,unemotional,10,-1,fear,3,-1,fear,3
+413,"Think you skipped your meds again, bro",-1,sympathy,think you skipped your meds again bro,-1,unemotional,10,-1,sympathy,9,-1,sympathy,9
+414,High end pc + cheap laptop or tablet = playing your gaming pc anywhere at home. ,1,joy,high end pc  cheap laptop or tablet  playing your gaming pc anywhere at home,1,unemotional,10,1,joy,5,1,joy,5
+415,"But we’re talking about lockdown for a pandemic.
+
+Tower PC all the way.",-1,anger,but were talking about lockdown for a pandemictower pc all the way,-1,unemotional,10,-1,anger,0,-1,anger,0
+416,They will tell you yes.,1,joy,they will tell you yes,-1,unemotional,10,1,unemotional,10,1,unemotional,10
+417,If there's a draft,0,unemotional,if theres a draft,0,unemotional,10,0,unemotional,10,0,unemotional,10
+418,"As long as you aren't obese and can pass a piss test. 
+
+That's it.  That's the litmus test. 
+
+(Yes, there's a handful of medical DQs as well)",-1,surprise,as long as you arent obese and can pass a piss test thats it  thats the litmus test yes theres a handful of medical dqs as well,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+419,See it like this way. You're surrounded by like-minded people.,1,joy,see it like this way youre surrounded by likeminded people,1,unemotional,10,1,joy,5,1,joy,5
+420,That same info can be found in the articles I've read about the virus.  This shouldn't be difficult but the news got clicks and social media bullshit will do the rest.,-1,disgust,that same info can be found in the articles ive read about the virus  this shouldnt be difficult but the news got clicks and social media bullshit will do the rest,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+421,"The SARS pandemic in 2003-2004 was also caused by a coronavirus.
+
+Thus why covid is designated as SARS-COV-2.",0,unemotional,the sars pandemic in  was also caused by a coronavirusthus why covid is designated as sarscov,0,unemotional,10,0,unemotional,10,0,unemotional,10
+422,There are a couple of coronavirus cold viruses. At least one of them caused a similar pandemic in the past when it was new. Covid 19 will likely end up the same.,1,sympathy,there are a couple of coronavirus cold viruses at least one of them caused a similar pandemic in the past when it was new covid  will likely end up the same,1,unemotional,10,1,unemotional,10,1,unemotional,10
+423,"That’s like saying:
+
+ “Barcodes have been around since 1948, but *that specific barcode number* was ~~created~~ discovered and named in 2019 and didn’t exist before then (in that sequence).”",0,unemotional,thats like saying barcodes have been around since  but that specific barcode number was created discovered and named in  and didnt exist before then in that sequence,0,unemotional,10,0,unemotional,10,0,unemotional,10
+424,"Cool bonus: unlike COVID which flummoxed us by its transmission methods, we know that flu is transmitted by spittle droplets.  Basic masks work for flu.",1,joy,cool bonus unlike covid which flummoxed us by its transmission methods we know that flu is transmitted by spittle droplets  basic masks work for flu,0,unemotional,10,0,joy,5,0,joy,5
+425,And traces back to 50 years ago? Wow. I knew it was discovered in 2001 but it's even worse (or funnier).,-1,sad,and traces back to  years ago wow i knew it was discovered in  but its even worse or funnier,-1,unemotional,10,-1,unemotional,10,-1,sad,7
+426,"On top of this there is a vaccine for it in the works, same mRNA as with covid",1,relief,on top of this there is a vaccine for it in the works same mrna as with covid,0,unemotional,10,0,unemotional,10,0,unemotional,10
+427,That's why he's gotta be quick. It's not yet widespread.,-1,fear,thats why hes gotta be quick its not yet widespread,-1,unemotional,10,-1,fear,3,-1,fear,3
+428,He will douse the box in vodka,-1,disgust,he will douse the box in vodka,-1,unemotional,10,-1,unemotional,10,-1,surprise,8
+429,![gif](giphy|xT5LMPN4NO7dj37wBO|downsized),0,unemotional,gifgiphyxtlmpnnodjwbodownsized,0,unemotional,10,-1,unemotional,10,-1,unemotional,10
+430,They taught us how to prevent this the last pandemic and it’s to blast your groceries/items with hand sanitizer and Lysol wipes.,1,sympathy,they taught us how to prevent this the last pandemic and its to blast your groceriesitems with hand sanitizer and lysol wipes,1,unemotional,10,1,sympathy,9,1,sympathy,9
+431,Exactly. PC parts are made in China (like the virus).,-1,anger,exactly pc parts are made in china like the virus,-1,unemotional,10,-1,anger,0,-1,anger,0
+432,"The mortality rate is 50% among birds, but that doesn't mean it'll be 50% for humans too. Just depends on how it mutates if/when it jumps to humans. We shall see. 
+
+At least a good N95/KN95 mask will still protect you pretty well. I still have my stock from COVID.",1,sympathy,the mortality rate is  among birds but that doesnt mean itll be  for humans too just depends on how it mutates ifwhen it jumps to humans we shall see at least a good nkn mask will still protect you pretty well i still have my stock from covid,1,unemotional,10,1,sympathy,9,1,sympathy,9
+433,Hasn't it already hit like 65 people in Alabama?,1,surprise,hasnt it already hit like  people in alabama,1,unemotional,10,1,surprise,8,1,surprise,8
+434,"The media has control of your emotions bud, zoom out a bit and learn about these things rather than giving yourself anxiety from over-sensationalized headlines",1,sympathy,the media has control of your emotions bud zoom out a bit and learn about these things rather than giving yourself anxiety from oversensationalized headlines,1,unemotional,10,1,sympathy,9,1,sympathy,9
+435,See my point about the couch. And lockdown ends eventually.,0,unemotional,see my point about the couch and lockdown ends eventually,0,unemotional,10,0,unemotional,10,0,unemotional,10
+436,luckily I've got broken teeth so they won't accept me,-1,fear,luckily ive got broken teeth so they wont accept me,-1,unemotional,10,-1,fear,3,-1,fear,3
+437,then close the window,0,unemotional,then close the window,0,unemotional,10,-1,unemotional,10,-1,surprise,8
+438,That’s what I’m saying. If you want to convince someone that what they’re reading on social media isn’t true you should send them verifiable sources stating it rather than sending them a reddit comment.,-1,anger,thats what im saying if you want to convince someone that what theyre reading on social media isnt true you should send them verifiable sources stating it rather than sending them a reddit comment,-1,anger,0,-1,anger,0,-1,anger,0
+439,"Yes, and it's relevant because the specific barcode is what decides if you get sniffles or smallpox",-1,sympathy,yes and its relevant because the specific barcode is what decides if you get sniffles or smallpox,-1,unemotional,10,-1,unemotional,10,-1,sympathy,9
+440,Well that's terrible news given how many troglodytes have politicized masks and refuse to wear them.,1,surprise,well thats terrible news given how many troglodytes have politicized masks and refuse to wear them,-1,unemotional,10,-1,surprise,8,-1,surprise,8
+441,So you’re telling me I ingested someone else’s mouth spittle without realising it? Just coming round from flu after having it since the week before Christmas. I had it last year too except it was flu b not flu a. I got all my vaccinations and it still knocked me down. I’d hate to see what it would be like without taking a vaccine.,-1,anger,so youre telling me i ingested someone elses mouth spittle without realising it just coming round from flu after having it since the week before christmas i had it last year too except it was flu b not flu a i got all my vaccinations and it still knocked me down id hate to see what it would be like without taking a vaccine,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+442,"Yeah, its an annoying decease but it's really not a threat on par with covid like some outlets like to pretend",0,unemotional,yeah its an annoying decease but its really not a threat on par with covid like some outlets like to pretend,0,unemotional,10,0,unemotional,10,0,unemotional,10
+443,Wait..... there's seriously ANOTHER virus that's spreading out of China?,-1,surprise,wait theres seriously another virus thats spreading out of china,-1,unemotional,10,-1,surprise,8,-1,surprise,8
+444,and a little on the mailman just to be sure,0,unemotional,and a little on the mailman just to be sure,0,unemotional,10,-1,unemotional,10,-1,unemotional,10
+445,"Birds also don't have much in the way of hospitals and medicine. Veterinary care exists, but it is rather inadequate for entire populations when compared with human medical care.",1,sympathy,birds also dont have much in the way of hospitals and medicine veterinary care exists but it is rather inadequate for entire populations when compared with human medical care,1,unemotional,10,1,sympathy,9,1,sympathy,9
+446,"Hook it up to the TV.
+
+Get a new PC when lockdown ends… it’ll be time for a new one by then.",1,joy,hook it up to the tvget a new pc when lockdown ends itll be time for a new one by then,1,unemotional,10,1,unemotional,10,1,unemotional,10
+447,"Well mild inconveniences kill more Americans than plagues, you know.",-1,fear,well mild inconveniences kill more americans than plagues you know,-1,unemotional,10,-1,fear,3,-1,fear,3
+448,Ever smell a fart? I've got bad news,-1,disgust,ever smell a fart ive got bad news,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+449,"HMPV has been around forever, we have had outbreaks in the US for a long time.  It's not a new virus, it's just making the news because China can't seem to unfuck themselves.",-1,anger,hmpv has been around forever we have had outbreaks in the us for a long time  its not a new virus its just making the news because china cant seem to unfuck themselves,0,unemotional,10,0,anger,0,-1,anger,0
+450,"They didn’t succeed in bringing down the west last time, so they have to keep trying",-1,fear,they didnt succeed in bringing down the west last time so they have to keep trying,-1,unemotional,10,-1,fear,3,-1,fear,3
+451,[removed],0,unemotional,removed,0,unemotional,10,0,unemotional,10,0,unemotional,10
+452,HMPV was already discovered in 2001 and causes usually just a mild-cold.,-1,surprise,hmpv was already discovered in  and causes usually just a mildcold,-1,unemotional,10,-1,surprise,8,-1,surprise,8
+453,"There are dozens spreading around the USA at any given time. Usually they don't cause significant enough change in symptom/mortality to be distinguished from the common cold/influenza.
+
+
+Lately they've been getting a little more exotic in Asian countries (probably due to deregulation and food/industry cleanliness standards, no way to know for sure).
+
+
+But there's really no reason to believe that this is **only happening** in China unless you buy into lab leak conspiracy stuff which just isn't credible enough to take seriously.
+
+
+Vaccines didn't eradicate covid its still here and still mutating within our population, just much slower with longer ""evolutionary intervals"" because it can't spread her as frequently and mutate more.",-1,anger,there are dozens spreading around the usa at any given time usually they dont cause significant enough change in symptommortality to be distinguished from the common coldinfluenzalately theyve been getting a little more exotic in asian countries probably due to deregulation and foodindustry cleanliness standards no way to know for surebut theres really no reason to believe that this is only happening in china unless you buy into lab leak conspiracy stuff which just isnt credible enough to take seriouslyvaccines didnt eradicate covid its still here and still mutating within our population just much slower with longer evolutionary intervals because it cant spread her as frequently and mutate more,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+454,Don't forget to vodka the mailman. *check*,1,joy,dont forget to vodka the mailman check,1,unemotional,10,1,joy,5,1,joy,5
+455,"It's not about the option existing, it's about the convenience. Do you hook up the PC to your TV and then move it back to your office every time you wanna sit somewhere else?
+
+Also, the last lockdown ended after a year where I lived. Do you buy a new PC every year? I assure you most people don't.",-1,anger,its not about the option existing its about the convenience do you hook up the pc to your tv and then move it back to your office every time you wanna sit somewhere elsealso the last lockdown ended after a year where i lived do you buy a new pc every year i assure you most people dont,-1,unemotional,10,-1,anger,0,-1,anger,0
+456,"Coronavirus was around for a while, too. But if it's a new, more aggressive strain then we got problems",-1,fear,coronavirus was around for a while too but if its a new more aggressive strain then we got problems,-1,unemotional,10,-1,fear,3,-1,fear,3
+457,Conspiracy believers make great entertainment until you realize they're serious.,-1,fear,conspiracy believers make great entertainment until you realize theyre serious,-1,unemotional,10,-1,fear,3,-1,fear,3
+458,"You know what they say….if at first you don’t succeed, try again.",0,unemotional,you know what they sayif at first you dont succeed try again,0,unemotional,10,0,unemotional,10,0,unemotional,10
+459,"This virus is basically the common cold and is already common in the US, most people here probably already had HMPV as kids.",-1,disgust,this virus is basically the common cold and is already common in the us most people here probably already had hmpv as kids,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+460,[removed],0,unemotional,removed,0,unemotional,10,0,unemotional,10,0,unemotional,10
+461,"I wouldn’t mind moving the tower to do that, no.  The problem with PC gaming on the couch is the mouse… and if you’re playing games that don’t really require a mouse… you don’t really need a gaming rig.
+
+And yea mandatory lockdowns weren’t long, but being considerate and quarantining yourself lasted a few years.  I upgrade every few years.",1,joy,i wouldnt mind moving the tower to do that no  the problem with pc gaming on the couch is the mouse and if youre playing games that dont really require a mouse you dont really need a gaming rigand yea mandatory lockdowns werent long but being considerate and quarantining yourself lasted a few years  i upgrade every few years,0,unemotional,10,0,unemotional,10,0,unemotional,10
+462,It's not anything more aggressive than it was previously.  Australia came out and said it's the same thing they have seen for years.  Australia has a closer relationship with travel/tourism and trade with China. They see all the problems before the US does.,-1,anger,its not anything more aggressive than it was previously  australia came out and said its the same thing they have seen for years  australia has a closer relationship with traveltourism and trade with china they see all the problems before the us does,-1,anger,0,-1,anger,0,-1,anger,0
+463,I remember at work when we first heard about covid. Someone was using the lysol and said hey...this shit already says coronavirus. If it's old why are we concerned?  Lmao,1,joy,i remember at work when we first heard about covid someone was using the lysol and said heythis shit already says coronavirus if its old why are we concerned  lmao,1,unemotional,10,1,unemotional,10,1,unemotional,10
+464,"Sars-cov-2 was not around for a while… it was first identified in 2019 and there is no evidence for it’s existence before that.  
+
+Saying “coronavirus was around for a while too” is like discovering a completely new man / bear / pig and saying, “meh, vertebrates have been around for a while.”   
+
+i can definitely see this being the new misinformation though…",-1,anger,sarscov was not around for a while it was first identified in  and there is no evidence for its existence before that  saying coronavirus was around for a while too is like discovering a completely new man  bear  pig and saying meh vertebrates have been around for a while   i can definitely see this being the new misinformation though,-1,unemotional,10,-1,anger,0,-1,anger,0
+465,"And if that doesn't work too, third time's the charm",-1,fear,and if that doesnt work too third times the charm,-1,unemotional,10,-1,fear,3,-1,fear,3
+466,Good to know. Thanks for the information.,1,relief,good to know thanks for the information,1,unemotional,10,1,relief,6,1,relief,6
+467,"What’s funny is it’s reported 3 cases in India now but they say no need to worry. While the virus affects all ages it’s more serious in ages under 5 and over 65, or those with a weak immune system. Gee, where have I heard that before?",-1,fear,whats funny is its reported  cases in india now but they say no need to worry while the virus affects all ages its more serious in ages under  and over  or those with a weak immune system gee where have i heard that before,-1,fear,3,-1,fear,3,-1,fear,3
+468,"> if you’re playing games that don’t really require a mouse… you don’t really need a gaming rig.
+
+absolute braindead take
+
+all the most demanding games you can play right now are all controller playable
+
+meanwhile, the only titles I can think of that are kbm only are esports titles that can run on potatoes",0,unemotional,if youre playing games that dont really require a mouse you dont really need a gaming rigabsolute braindead takeall the most demanding games you can play right now are all controller playablemeanwhile the only titles i can think of that are kbm only are esports titles that can run on potatoes,0,unemotional,10,0,unemotional,10,0,unemotional,10
+469,"Honestly, great to hear that from Australia. Genuinely comforting news on that front. I guess people are just making mountains out of molehills. As they do",1,relief,honestly great to hear that from australia genuinely comforting news on that front i guess people are just making mountains out of molehills as they do,1,unemotional,10,1,relief,6,1,relief,6
+470,The bird flu going around while conservative influencers are pushing raw milk however…,-1,anger,the bird flu going around while conservative influencers are pushing raw milk however,-1,unemotional,10,-1,anger,0,-1,anger,0
+471,Meh.. ManBearPig has been around since 2006..,0,unemotional,meh manbearpig has been around since,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+472,"Tbh, what isn't more serious in ages under 5, over 65 and to those with a weak immune system? I feel like that is a given lol",-1,surprise,tbh what isnt more serious in ages under  over  and to those with a weak immune system i feel like that is a given lol,-1,unemotional,10,-1,surprise,8,-1,surprise,8
+473,"
+
+>While the virus affects all ages it’s more serious in ages under 5 and over 65, or those with a weak immune system.
+
+Soo, nearly every serious virus/sickness ever...",-1,fear,while the virus affects all ages its more serious in ages under  and over  or those with a weak immune systemsoo nearly every serious virussickness ever,-1,unemotional,10,-1,fear,3,-1,fear,3
+474,"Thanks for posting to /r/GetNoted. Please remember Rule 2: **Politics only allowed at r/PoliticsNoted.** We do allow historical posts (WW2, Ancient Rome, Ottomans, etc.) Just no current politicians.
+***
+We are also banning posts about the ongoing Israel/Palestine conflict as well as the Iran/Israel/USA conflict. 
+
+Please report this post if it is about current Republicans, Democrats, Presidents, Prime Ministers, Israel/Palestine or anything else related to current politics. Thanks.
+
+
+*I am a bot, and this action was performed automatically. Please [contact the moderators of this subreddit](/message/compose/?to=/r/GetNoted) if you have any questions or concerns.*",0,unemotional,thanks for posting to rgetnoted please remember rule  politics only allowed at rpoliticsnoted we do allow historical posts ww ancient rome ottomans etc just no current politicianswe are also banning posts about the ongoing israelpalestine conflict as well as the iranisraelusa conflict please report this post if it is about current republicans democrats presidents prime ministers israelpalestine or anything else related to current politics thanksi am a bot and this action was performed automatically please contact the moderators of this subredditmessagecomposetorgetnoted if you have any questions or concerns,0,unemotional,10,0,unemotional,10,0,unemotional,10
+475,This dude gets around.,0,unemotional,this dude gets around,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+476,"https://preview.redd.it/ly4kqkfhkjfe1.jpeg?width=1003&format=pjpg&auto=webp&s=16654d18df8ab010e31401789ef5f309725f4a0e
+
+Seems Bryan isn’t the actual person behind the picture.",1,joy,seems bryan isnt the actual person behind the picture,1,unemotional,10,1,joy,5,1,joy,5
+477,I am confused? they just randomly placed his pic on that article?,-1,surprise,i am confused they just randomly placed his pic on that article,-1,unemotional,10,-1,surprise,8,-1,surprise,8
+478,"I mean, Bryan has to have been up to SOMETHING while he was jobless. /s",1,joy,i mean bryan has to have been up to something while he was jobless s,1,unemotional,10,1,joy,5,1,joy,5
+479,Their AI has a hard on for him.,0,unemotional,their ai has a hard on for him,0,unemotional,10,0,unemotional,10,0,unemotional,10
+480,"""Gaza bombings continue, thousands displaced"" accompanied by a picture of rubble and Bryan's face",-1,disgust,gaza bombings continue thousands displaced accompanied by a picture of rubble and bryans face,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+481,Some people seem to believe that he owns both accounts and does it to get views. no clue what is true personally,-1,sympathy,some people seem to believe that he owns both accounts and does it to get views no clue what is true personally,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+482,"I hope his picture is used for a bunch of different articles from different countries. Just to fuck with future historians. Like, ""why is Bryan in this one too?""",-1,anger,i hope his picture is used for a bunch of different articles from different countries just to fuck with future historians like why is bryan in this one too,-1,anger,0,-1,anger,0,-1,anger,0
+483,r/Fuckyouinparticular,-1,anger,rfuckyouinparticular,0,unemotional,10,-1,anger,0,-1,anger,0
+484,I’m old. Is finna a typo?,-1,sad,im old is finna a typo,-1,unemotional,10,-1,sad,7,-1,sad,7
+485,maybe he can be Bad News Bryan,-1,sad,maybe he can be bad news bryan,-1,unemotional,10,-1,unemotional,10,-1,unemotional,10
+486,You guys still promoting xitter?,1,surprise,you guys still promoting xitter,1,unemotional,10,1,surprise,8,1,surprise,8
+487,We are watching an origin story and character arc in the making people!,0,unemotional,we are watching an origin story and character arc in the making people,0,unemotional,10,0,unemotional,10,0,unemotional,10
+488,Fuck nazi twitter,-1,anger,fuck nazi twitter,-1,anger,0,-1,anger,0,-1,anger,0
+489,"Maybe they'll care when the kids start dying from this stuff
+
+Oh, and them, since their leader is old as shit",-1,anger,maybe theyll care when the kids start dying from this stuffoh and them since their leader is old as shit,-1,unemotional,10,-1,anger,0,-1,anger,0
+490,"I've seen this guy's face a lot lately, who TF is he",-1,surprise,ive seen this guys face a lot lately who tf is he,-1,unemotional,10,-1,surprise,8,-1,surprise,8
+491,Nahh they done got Bryan,0,unemotional,nahh they done got bryan,0,unemotional,10,0,unemotional,10,0,unemotional,10
+492,Someone explain please,1,surprise,someone explain please,1,unemotional,10,1,unemotional,10,1,unemotional,10
+493,"aw fuck, is this what i've been sick with for the past few days?
+
+feels pretty gross to get a cold that's from the other side of the globe",1,surprise,aw fuck is this what ive been sick with for the past few daysfeels pretty gross to get a cold thats from the other side of the globe,1,unemotional,10,1,surprise,8,1,surprise,8
+494,"As he should
+
+It's also some fake news they are spreading",-1,disgust,as he shouldits also some fake news they are spreading,-1,unemotional,10,-1,disgust,1,-1,disgust,1
+495,"STOP TRYING TO MAKE FINNA HAPPEN, ITS NOT GOING TO HAPPEN.",-1,anger,stop trying to make finna happen its not going to happen,0,unemotional,10,0,anger,0,-1,anger,0
+496,"People who use ""finna"" unironically are of low intelligence. 
+
+You cannot change my mind.",-1,joy,people who use finna unironically are of low intelligence you cannot change my mind,-1,unemotional,10,-1,joy,5,-1,joy,5
+497,"He is the face of unemployment, so he's got lots of time on his hands.",1,enthusiasm,he is the face of unemployment so hes got lots of time on his hands,1,unemotional,10,1,enthusiasm,2,1,enthusiasm,2
+498,"As soon as he said “finna”, I knew Bryan wasn’t Bryan.",1,joy,as soon as he said finna i knew bryan wasnt bryan,1,unemotional,10,1,joy,5,1,joy,5
+499,I guess community notes work pretty well…,0,unemotional,i guess community notes work pretty well,0,unemotional,10,0,unemotional,10,0,unemotional,10
+500,"They’ve done it a couple times, that’s why he’s suing. I think this is the 3rd time they’ve just posted his face on an article about something bad happening. It’s really bizarre.",-1,sad,theyve done it a couple times thats why hes suing i think this is the rd time theyve just posted his face on an article about something bad happening its really bizarre,-1,unemotional,10,-1,sad,7,-1,sad,7
