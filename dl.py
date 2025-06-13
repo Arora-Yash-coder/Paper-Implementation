@@ -1,119 +1,154 @@
 import os
-import pandas as pd
+import re
+import nltk
+import joblib
 import numpy as np
-import tensorflow as tf
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import classification_report, accuracy_score
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, Conv1D, LSTM, Dense, GlobalMaxPooling1D
-from sklearn.model_selection import train_test_split
-import joblib
+from tensorflow.keras.layers import Embedding, Conv1D, GlobalMaxPooling1D, LSTM, Dense, Dropout
 
-# Ensure models directory exists
-os.makedirs("models", exist_ok=True)
+nltk.download('stopwords')
+nltk.download('wordnet')
 
-# Load rule-based sentiment results
-print("Loading rule-based sentiment results...")
-df = pd.read_csv("hmpv_rule_based_results.csv")
+# ========== CONFIG ========== #
+INPUT_FILE = 'input_data.csv'
+OUTPUT_DIR = 'results/dl_models'
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Generate Confidence Weighted Sentiment
-print("Generating final sentiment labels (confidence weighted)...")
-df['combined_score'] = (df['vader_score'] + df['textblob_score']) / 2
+# ========== TEXT CLEANING ========== #
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
 
-def assign_sentiment(score):
-    if score > 0.05:
-        return 2   # Positive
-    elif score < -0.05:
-        return 0   # Negative
-    else:
-        return 1   # Neutral
+def preprocess(text):
+    text = re.sub(r'[^\w\s]', '', str(text).lower())
+    words = [lemmatizer.lemmatize(w) for w in text.split() if w not in stop_words]
+    return ' '.join(words)
 
-df['sentiment'] = df['combined_score'].apply(assign_sentiment)
-
-print(f"Total samples: {len(df)}")
-print(df['sentiment'].value_counts())
-
-# Prepare text data
-print("Preparing tokenized padded sequences...")
-df['clean_comment'] = df['clean_comment'].fillna('')
-texts = df['clean_comment'].values
-
-# Tokenization
-vocab_size = 5000
-max_length = 100
-
-tokenizer = Tokenizer(num_words=vocab_size, oov_token="<OOV>")
-tokenizer.fit_on_texts(texts)
-sequences = tokenizer.texts_to_sequences(texts)
-padded_sequences = pad_sequences(sequences, maxlen=max_length, padding='post')
-
-# Save tokenizer
-tokenizer_path = "models/tokenizer_dl.pkl"
-joblib.dump(tokenizer, tokenizer_path)
-print(f"Tokenizer saved to {tokenizer_path}")
-
-# Features and labels
-X = padded_sequences
-y = df['sentiment']
-
-# Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Define CNN model
-def create_cnn(vocab_size, input_length):
+# ========== MODEL BUILDERS ========== #
+def build_cnn_model(input_length, vocab_size):
     model = Sequential([
-        Embedding(vocab_size, 128, input_length=input_length),
-        Conv1D(64, 5, activation='relu'),
+        Embedding(input_dim=vocab_size, output_dim=128, input_length=input_length),
+        Conv1D(128, 5, activation='relu'),
         GlobalMaxPooling1D(),
-        Dense(10, activation='relu'),
-        Dense(3, activation='softmax')
+        Dense(64, activation='relu'),
+        Dropout(0.5),
+        Dense(1, activation='sigmoid')  # for binary, will be replaced
     ])
     model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
-# Define LSTM model
-def create_lstm(vocab_size, input_length):
+def build_lstm_model(input_length, vocab_size):
     model = Sequential([
-        Embedding(vocab_size, 128, input_length=input_length),
-        LSTM(64, return_sequences=True),
-        LSTM(32),
-        Dense(10, activation='relu'),
-        Dense(3, activation='softmax')
+        Embedding(input_dim=vocab_size, output_dim=128, input_length=input_length),
+        LSTM(128, return_sequences=False),
+        Dense(64, activation='relu'),
+        Dropout(0.5),
+        Dense(1, activation='sigmoid')  # for binary, will be replaced
     ])
     model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
-# Train CNN model
-print("\nTraining CNN model...")
-cnn_model = create_cnn(vocab_size, max_length)
-cnn_model.fit(X_train, y_train, epochs=5, batch_size=64, validation_data=(X_test, y_test))
+# ========== TRAIN & SAVE FUNCTION ========== #
+def train_evaluate_save(model, model_name, task_name, X_train, X_test, y_train, y_test, label_encoder, raw_texts_test):
+    history = model.fit(X_train, y_train, epochs=5, batch_size=64, validation_split=0.1, verbose=0)
 
-# Save CNN model
-cnn_path = "models/cnn_model.h5"
-cnn_model.save(cnn_path)
-print(f"CNN model saved to {cnn_path}")
+    train_acc = history.history['accuracy'][-1]
+    test_preds = model.predict(X_test, verbose=0)
+    y_pred = np.argmax(test_preds, axis=1)
 
-# Predict with CNN model
-print("Predicting using CNN model...")
-cnn_preds = cnn_model.predict(X)
-df['cnn_sentiment'] = np.argmax(cnn_preds, axis=1)
+    test_acc = accuracy_score(y_test, y_pred)
 
-# Train LSTM model
-print("\nTraining LSTM model...")
-lstm_model = create_lstm(vocab_size, max_length)
-lstm_model.fit(X_train, y_train, epochs=5, batch_size=64, validation_data=(X_test, y_test))
+    # Decode for human-readable output
+    y_test_decoded = label_encoder.inverse_transform(y_test)
+    y_pred_decoded = label_encoder.inverse_transform(y_pred)
+    class_names = [str(c) for c in label_encoder.classes_]
 
-# Save LSTM model
-lstm_path = "models/lstm_model.h5"
-lstm_model.save(lstm_path)
-print(f"LSTM model saved to {lstm_path}")
+    report = classification_report(
+        y_test_decoded, y_pred_decoded,
+        labels=class_names,
+        target_names=class_names,
+        zero_division=0
+    )
 
-# Predict with LSTM model
-print("Predicting using LSTM model...")
-lstm_preds = lstm_model.predict(X)
-df['lstm_sentiment'] = np.argmax(lstm_preds, axis=1)
+    print(f"{model_name} - {task_name.lower()} - Train Accuracy: {train_acc:.4f}, Test Accuracy: {test_acc:.4f}")
+    print(report)
 
-# Save results
-output_file = "hmpv_dl_results.csv"
-df.to_csv(output_file, index=False)
-print(f"\n✅ Deep Learning sentiment analysis completed. Results saved to {output_file}")
+    # Save model
+    model_path = os.path.join(OUTPUT_DIR, f"{model_name.lower()}_{task_name.lower()}.h5")
+    model.save(model_path)
+
+    # Save predictions
+    pred_df = pd.DataFrame({
+        'text': raw_texts_test,
+        'actual': y_test_decoded,
+        'predicted': y_pred_decoded
+    })
+    pred_file = f"predictions_{task_name.lower()}.csv"
+    pred_df.to_csv(os.path.join(OUTPUT_DIR, pred_file), index=False)
+
+# ========== MAIN ========== #
+def main():
+    df = pd.read_csv(INPUT_FILE)
+    df.dropna(subset=['comment', 'sentiment', 'emotion'], inplace=True)
+    df['clean_text'] = df['comment'].astype(str).apply(preprocess)
+
+    # Tokenization
+    tokenizer = Tokenizer(num_words=10000, oov_token='<OOV>')
+    tokenizer.fit_on_texts(df['clean_text'])
+    sequences = tokenizer.texts_to_sequences(df['clean_text'])
+    padded = pad_sequences(sequences, maxlen=100)
+
+    # Save tokenizer ✅
+    joblib.dump(tokenizer, os.path.join(OUTPUT_DIR, "tokenizer.joblib"))
+
+    # Label encoders
+    le_sentiment = LabelEncoder()
+    y_sentiment = le_sentiment.fit_transform(df['sentiment'])
+    joblib.dump(le_sentiment, os.path.join(OUTPUT_DIR, "sentiment_encoder.joblib"))  # ✅
+
+    le_emotion = LabelEncoder()
+    y_emotion = le_emotion.fit_transform(df['emotion'])
+    joblib.dump(le_emotion, os.path.join(OUTPUT_DIR, "emotion_encoder.joblib"))  # ✅
+
+    # --- Sentiment Classification --- #
+    print("\n--- Sentiment Classification ---")
+    X_train, X_test, y_train, y_test, texts_train, texts_test = train_test_split(
+        padded, y_sentiment, df['comment'].values, test_size=0.2, random_state=42
+    )
+
+    vocab_size = min(len(tokenizer.word_index) + 1, 10000)
+    input_length = padded.shape[1]
+
+    for builder, name in [(build_cnn_model, "CNN"), (build_lstm_model, "LSTM")]:
+        model = builder(input_length, vocab_size)
+        model.pop()
+        model.add(Dense(len(le_sentiment.classes_), activation='softmax'))
+        model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+        train_evaluate_save(model, name, "Sentiment", X_train, X_test,
+                            y_train, y_test, le_sentiment, texts_test)
+
+    # --- Emotion Classification --- #
+    print("\n--- Emotion Classification ---")
+    X_train, X_test, y_train, y_test, texts_train, texts_test = train_test_split(
+        padded, y_emotion, df['comment'].values, test_size=0.2, random_state=42
+    )
+
+    for builder, name in [(build_cnn_model, "CNN"), (build_lstm_model, "LSTM")]:
+        model = builder(input_length, vocab_size)
+        model.pop()
+        model.add(Dense(len(le_emotion.classes_), activation='softmax'))
+        model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+        train_evaluate_save(model, name, "Emotion", X_train, X_test,
+                            y_train, y_test, le_emotion, texts_test)
+
+if __name__ == "__main__":
+    main()

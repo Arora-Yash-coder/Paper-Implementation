@@ -1,55 +1,117 @@
-# RULE-BASED SENTIMENT ANALYSIS (Updated)
 import pandas as pd
-import re
-import ast
+import numpy as np
 import os
-import joblib
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+import re
+import string
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
+from sklearn.metrics import classification_report, accuracy_score
+from sklearn.preprocessing import LabelEncoder
+from cleantext import clean
 
-# Create models directory if not exists
-os.makedirs("models", exist_ok=True)
+nltk.download('vader_lexicon')
+nltk.download('stopwords')
 
-print("📥 Loading dataset...")
-df = pd.read_csv("hmpv_tweets.csv")
+from nltk.corpus import stopwords
 
-print("🔄 Exploding comments...")
-df['comments'] = df['comments'].apply(lambda x: ast.literal_eval(x))
+def preprocess_text(text):
+    if pd.isna(text):
+        return ""
+    text = text.lower()
+    text = clean(text,
+                 fix_unicode=True,
+                 to_ascii=True,
+                 no_line_breaks=True,
+                 no_urls=True,
+                 no_emails=True,
+                 no_phone_numbers=True,
+                 no_numbers=True,
+                 no_digits=True,
+                 no_currency_symbols=True,
+                 no_punct=True,
+                 replace_with_url="",
+                 replace_with_email="",
+                 replace_with_phone_number="",
+                 replace_with_number="",
+                 replace_with_digit="",
+                 replace_with_currency_symbol="")
+    text = re.sub(r'\s+', ' ', text).strip()
+    stop_words = set(stopwords.words('english'))
+    tokens = text.split()
+    tokens = [word for word in tokens if word not in stop_words]
+    return " ".join(tokens)
 
-comments_data = []
-for idx, row in df.iterrows():
-    for comment in row['comments']:
-        comments_data.append({
-            'post_index': idx,
-            'comment': comment
-        })
+def vader_sentiment(text):
+    if not text:
+        return 0
+    scores = SentimentIntensityAnalyzer().polarity_scores(text)
+    compound = scores['compound']
+    if compound >= 0.05:
+        return 1
+    elif compound <= -0.05:
+        return -1
+    else:
+        return 0
 
-comments_df = pd.DataFrame(comments_data)
+def textblob_sentiment(text):
+    if not text:
+        return 0
+    polarity = TextBlob(text).sentiment.polarity
+    if polarity > 0.05:
+        return 1
+    elif polarity < -0.05:
+        return -1
+    else:
+        return 0
 
-print("🧹 Cleaning comments...")
-def clean_text(text):
-    text = re.sub(r"http\S+|www\S+", '', text.lower())
-    return re.sub(r'[^a-zA-Z ]', '', text).strip()
+def evaluate_model(true_labels, predicted_labels, model_name, task, output_dir):
+    accuracy = accuracy_score(true_labels, predicted_labels)
+    report = classification_report(true_labels, predicted_labels, zero_division=0)
+    
+    # Save report
+    report_path = os.path.join(output_dir, f"{model_name}_{task}_report.txt")
+    with open(report_path, 'w') as f:
+        f.write(f"{model_name} {task.capitalize()} Classification Report:\n\n")
+        f.write(report)
+        f.write(f"\nAccuracy: {accuracy:.4f}\n")
 
-comments_df['clean_comment'] = comments_df['comment'].apply(clean_text)
+    return accuracy
 
-print("🧠 Initializing sentiment analyzers...")
-analyzer = SentimentIntensityAnalyzer()
+def main():
+    input_file = "input_data.csv"
+    output_dir = "results/rule_based_models"
+    os.makedirs(output_dir, exist_ok=True)
 
-print("🔍 Applying VADER sentiment analysis...")
-comments_df['vader_score'] = comments_df['clean_comment'].apply(lambda x: analyzer.polarity_scores(x)['compound'])
-comments_df['vader_sentiment'] = comments_df['vader_score'].apply(lambda x: -1 if x < -0.05 else (1 if x > 0.05 else 0))
+    df = pd.read_csv(input_file)
+    df.dropna(subset=['comment', 'sentiment', 'emotion'], inplace=True)
+    df['comment'] = df['comment'].apply(preprocess_text)
 
-print("🔍 Applying TextBlob sentiment analysis...")
-comments_df['textblob_score'] = comments_df['clean_comment'].apply(lambda x: TextBlob(x).sentiment.polarity)
-comments_df['textblob_sentiment'] = comments_df['textblob_score'].apply(lambda x: -1 if x < -0.1 else (1 if x > 0.1 else 0))
+    df['sentiment_encoded'] = df['sentiment'].astype(int)
 
-# Save results
-output_file = "hmpv_rule_based_results.csv"
-comments_df.to_csv(output_file, index=False)
-print(f"✅ Rule-based results saved to {output_file}")
+    emotion_encoder = LabelEncoder()
+    df['emotion_encoded'] = emotion_encoder.fit_transform(df['emotion'])
+    np.save(os.path.join(output_dir, 'emotion_classes.npy'), emotion_encoder.classes_)
 
-# Save models
-joblib.dump(analyzer, "models/vader_analyzer.joblib")
-joblib.dump(TextBlob, "models/textblob_sentiment_function.joblib")  # Function-like storage
-print("💾 Sentiment analyzers saved to 'models/' folder")
+    df['vader_sentiment'] = df['comment'].apply(vader_sentiment)
+    df['textblob_sentiment'] = df['comment'].apply(textblob_sentiment)
+
+    # Sentiment Evaluation
+    vader_acc = evaluate_model(df['sentiment_encoded'], df['vader_sentiment'],
+                               model_name='VADER', task='sentiment', output_dir=output_dir)
+    textblob_acc = evaluate_model(df['sentiment_encoded'], df['textblob_sentiment'],
+                                  model_name='TextBlob', task='sentiment', output_dir=output_dir)
+
+    # Log accuracies
+    log_file = os.path.join(output_dir, "accuracies.txt")
+    with open(log_file, 'w') as f:
+        f.write("Rule-Based Sentiment Model Accuracies\n")
+        f.write(f"VADER Accuracy: {vader_acc:.4f}\n")
+        f.write(f"TextBlob Accuracy: {textblob_acc:.4f}\n")
+
+    # Save predictions
+    df.to_csv(os.path.join(output_dir, "rule_based_predictions.csv"), index=False)
+    print("Rule-based sentiment analysis complete. Results saved.")
+
+if __name__ == "__main__":
+    main()
