@@ -1,154 +1,209 @@
-import os
-import re
-import nltk
-import joblib
-import numpy as np
+# DEEP LEARNING SENTIMENT & EMOTION ANALYSIS (FIXED)
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import classification_report, accuracy_score
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
+import numpy as np
+import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, Conv1D, GlobalMaxPooling1D, LSTM, Dense, Dropout
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+import joblib
+import re
+import os
 
-nltk.download('stopwords')
-nltk.download('wordnet')
+# Configuration
+DATA_PATH = "data/hmpv_comments_labeled.csv"
+MODELS_DIR = "models"
+RESULTS_DIR = "results"
+EMOTION_CATEGORIES = [
+    'happy', 'joy', 'fear', 'anger', 'enthusiasm',
+    'sad', 'relief', 'sympathy', 'surprise', 'disgust', 'unemotional'
+]
 
-# ========== CONFIG ========== #
-INPUT_FILE = 'input_data.csv'
-OUTPUT_DIR = 'results/dl_models'
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+def clean_text(text):
+    text = re.sub(r"http\S+|www\S+", '', str(text).lower())
+    return re.sub(r'[^a-zA-Z ]', '', text).strip()
 
-# ========== TEXT CLEANING ========== #
-stop_words = set(stopwords.words('english'))
-lemmatizer = WordNetLemmatizer()
-
-def preprocess(text):
-    text = re.sub(r'[^\w\s]', '', str(text).lower())
-    words = [lemmatizer.lemmatize(w) for w in text.split() if w not in stop_words]
-    return ' '.join(words)
-
-# ========== MODEL BUILDERS ========== #
-def build_cnn_model(input_length, vocab_size):
-    model = Sequential([
-        Embedding(input_dim=vocab_size, output_dim=128, input_length=input_length),
-        Conv1D(128, 5, activation='relu'),
-        GlobalMaxPooling1D(),
-        Dense(64, activation='relu'),
-        Dropout(0.5),
-        Dense(1, activation='sigmoid')  # for binary, will be replaced
+def create_cnn_model(vocab_size, input_length, output_units):
+    model = tf.keras.Sequential([
+        tf.keras.layers.Embedding(vocab_size, 128, input_length=input_length),
+        tf.keras.layers.Conv1D(64, 5, activation='relu'),
+        tf.keras.layers.GlobalMaxPooling1D(),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(output_units, activation='softmax')
     ])
-    model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    model.compile(loss='sparse_categorical_crossentropy',
+                 optimizer='adam',
+                 metrics=['accuracy'])
     return model
 
-def build_lstm_model(input_length, vocab_size):
-    model = Sequential([
-        Embedding(input_dim=vocab_size, output_dim=128, input_length=input_length),
-        LSTM(128, return_sequences=False),
-        Dense(64, activation='relu'),
-        Dropout(0.5),
-        Dense(1, activation='sigmoid')  # for binary, will be replaced
+def create_lstm_model(vocab_size, input_length, output_units):
+    model = tf.keras.Sequential([
+        tf.keras.layers.Embedding(vocab_size, 128, input_length=input_length),
+        tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64, return_sequences=True)),
+        tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dense(output_units, activation='softmax')
     ])
-    model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    model.compile(loss='sparse_categorical_crossentropy',
+                 optimizer='adam',
+                 metrics=['accuracy'])
     return model
 
-# ========== TRAIN & SAVE FUNCTION ========== #
-def train_evaluate_save(model, model_name, task_name, X_train, X_test, y_train, y_test, label_encoder, raw_texts_test):
-    history = model.fit(X_train, y_train, epochs=5, batch_size=64, validation_split=0.1, verbose=0)
-
-    train_acc = history.history['accuracy'][-1]
-    test_preds = model.predict(X_test, verbose=0)
-    y_pred = np.argmax(test_preds, axis=1)
-
-    test_acc = accuracy_score(y_test, y_pred)
-
-    # Decode for human-readable output
-    y_test_decoded = label_encoder.inverse_transform(y_test)
-    y_pred_decoded = label_encoder.inverse_transform(y_pred)
-    class_names = [str(c) for c in label_encoder.classes_]
-
-    report = classification_report(
-        y_test_decoded, y_pred_decoded,
-        labels=class_names,
-        target_names=class_names,
-        zero_division=0
-    )
-
-    print(f"{model_name} - {task_name.lower()} - Train Accuracy: {train_acc:.4f}, Test Accuracy: {test_acc:.4f}")
-    print(report)
-
-    # Save model
-    model_path = os.path.join(OUTPUT_DIR, f"{model_name.lower()}_{task_name.lower()}.h5")
-    model.save(model_path)
-
-    # Save predictions
-    pred_df = pd.DataFrame({
-        'text': raw_texts_test,
-        'actual': y_test_decoded,
-        'predicted': y_pred_decoded
-    })
-    pred_file = f"predictions_{task_name.lower()}.csv"
-    pred_df.to_csv(os.path.join(OUTPUT_DIR, pred_file), index=False)
-
-# ========== MAIN ========== #
 def main():
-    df = pd.read_csv(INPUT_FILE)
-    df.dropna(subset=['comment', 'sentiment', 'emotion'], inplace=True)
-    df['clean_text'] = df['comment'].astype(str).apply(preprocess)
+    # Setup directories
+    os.makedirs(MODELS_DIR, exist_ok=True)
+    os.makedirs(RESULTS_DIR, exist_ok=True)
+
+    # Load and preprocess data
+    print("📥 Loading dataset...")
+    df = pd.read_csv(DATA_PATH)
+    
+    # Clean and validate data
+    print("🧹 Cleaning and validating data...")
+    df['clean_comment'] = df['comment'].apply(clean_text)
+    
+    # Handle sentiment labels
+    df['sentiment'] = pd.to_numeric(df['sentiment'], errors='coerce').fillna(0).astype(int)
+    df = df[df['sentiment'].isin([-1, 0, 1])]
+    
+    # Convert to 0-based labels
+    df['sentiment_encoded'] = df['sentiment'] + 1  # Now 0,1,2
+    print("✅ Sentiment distribution:", df['sentiment_encoded'].value_counts())
+
+    # Handle emotion labels
+    df['emotion'] = df['emotion'].where(df['emotion'].isin(EMOTION_CATEGORIES), 'unemotional')
+    le_emotion = LabelEncoder()
+    le_emotion.fit(EMOTION_CATEGORIES)
+    df['emotion_encoded'] = le_emotion.transform(df['emotion'])
 
     # Tokenization
-    tokenizer = Tokenizer(num_words=10000, oov_token='<OOV>')
-    tokenizer.fit_on_texts(df['clean_text'])
-    sequences = tokenizer.texts_to_sequences(df['clean_text'])
-    padded = pad_sequences(sequences, maxlen=100)
+    print("🔠 Tokenizing comments...")
+    tokenizer = Tokenizer(num_words=5000, oov_token="<OOV>")
+    tokenizer.fit_on_texts(df['clean_comment'])
+    sequences = tokenizer.texts_to_sequences(df['clean_comment'])
+    padded_sequences = pad_sequences(sequences, maxlen=100, padding='post')
 
-    # Save tokenizer ✅
-    joblib.dump(tokenizer, os.path.join(OUTPUT_DIR, "tokenizer.joblib"))
+    # Save preprocessing artifacts
+    joblib.dump(tokenizer, f"{MODELS_DIR}/dl_tokenizer.joblib")
+    joblib.dump(le_emotion, f"{MODELS_DIR}/dl_emotion_encoder.joblib")
 
-    # Label encoders
-    le_sentiment = LabelEncoder()
-    y_sentiment = le_sentiment.fit_transform(df['sentiment'])
-    joblib.dump(le_sentiment, os.path.join(OUTPUT_DIR, "sentiment_encoder.joblib"))  # ✅
-
-    le_emotion = LabelEncoder()
-    y_emotion = le_emotion.fit_transform(df['emotion'])
-    joblib.dump(le_emotion, os.path.join(OUTPUT_DIR, "emotion_encoder.joblib"))  # ✅
-
-    # --- Sentiment Classification --- #
-    print("\n--- Sentiment Classification ---")
-    X_train, X_test, y_train, y_test, texts_train, texts_test = train_test_split(
-        padded, y_sentiment, df['comment'].values, test_size=0.2, random_state=42
+    # ===== Sentiment Analysis =====
+    print("\n🔍 Training Sentiment Models...")
+    X_train_s, X_test_s, y_train_s, y_test_s = train_test_split(
+        padded_sequences, 
+        df['sentiment_encoded'],
+        test_size=0.2,
+        stratify=df['sentiment_encoded'],
+        random_state=42
     )
+    
+    # CNN for Sentiment
+    print("\n🚀 Training CNN for Sentiment...")
+    cnn_sentiment = create_cnn_model(5000, 100, 3)
+    cnn_sentiment.fit(X_train_s, y_train_s, 
+                     epochs=5, 
+                     batch_size=64,
+                     validation_data=(X_test_s, y_test_s))
+    cnn_sentiment.save(f"{MODELS_DIR}/cnn_sentiment.h5")
+    
+    # LSTM for Sentiment
+    print("\n🚀 Training LSTM for Sentiment...")
+    lstm_sentiment = create_lstm_model(5000, 100, 3)
+    lstm_sentiment.fit(X_train_s, y_train_s, 
+                      epochs=5, 
+                      batch_size=64,
+                      validation_data=(X_test_s, y_test_s))
+    lstm_sentiment.save(f"{MODELS_DIR}/lstm_sentiment.h5")
 
-    vocab_size = min(len(tokenizer.word_index) + 1, 10000)
-    input_length = padded.shape[1]
-
-    for builder, name in [(build_cnn_model, "CNN"), (build_lstm_model, "LSTM")]:
-        model = builder(input_length, vocab_size)
-        model.pop()
-        model.add(Dense(len(le_sentiment.classes_), activation='softmax'))
-        model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-
-        train_evaluate_save(model, name, "Sentiment", X_train, X_test,
-                            y_train, y_test, le_sentiment, texts_test)
-
-    # --- Emotion Classification --- #
-    print("\n--- Emotion Classification ---")
-    X_train, X_test, y_train, y_test, texts_train, texts_test = train_test_split(
-        padded, y_emotion, df['comment'].values, test_size=0.2, random_state=42
+    # ===== Emotion Analysis =====
+    print("\n🎭 Training Emotion Models...")
+    X_train_e, X_test_e, y_train_e, y_test_e = train_test_split(
+        padded_sequences, 
+        df['emotion_encoded'],
+        test_size=0.2,
+        stratify=df['emotion_encoded'],
+        random_state=42
     )
+    
+    # CNN for Emotion
+    print("\n🚀 Training CNN for Emotion...")
+    cnn_emotion = create_cnn_model(5000, 100, len(EMOTION_CATEGORIES))
+    cnn_emotion.fit(X_train_e, y_train_e, 
+                   epochs=5, 
+                   batch_size=64,
+                   validation_data=(X_test_e, y_test_e))
+    cnn_emotion.save(f"{MODELS_DIR}/cnn_emotion.h5")
+    
+    # LSTM for Emotion
+    print("\n🚀 Training LSTM for Emotion...")
+    lstm_emotion = create_lstm_model(5000, 100, len(EMOTION_CATEGORIES))
+    lstm_emotion.fit(X_train_e, y_train_e, 
+                    epochs=5, 
+                    batch_size=64,
+                    validation_data=(X_test_e, y_test_e))
+    lstm_emotion.save(f"{MODELS_DIR}/lstm_emotion.h5")
 
-    for builder, name in [(build_cnn_model, "CNN"), (build_lstm_model, "LSTM")]:
-        model = builder(input_length, vocab_size)
-        model.pop()
-        model.add(Dense(len(le_emotion.classes_), activation='softmax'))
-        model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    # Generate and save sentiment classification reports
+    print("\n📊 Generating sentiment model reports...")
+    # CNN Sentiment Report
+    y_pred_cnn_sent = np.argmax(cnn_sentiment.predict(X_test_s), axis=1)
+    cnn_sent_report = classification_report(
+        y_test_s - 1,  # Convert back to -1,0,1 format
+        y_pred_cnn_sent - 1,  # Convert predictions back to -1,0,1 format
+        target_names=['Negative', 'Neutral', 'Positive'],
+        output_dict=True
+    )
+    pd.DataFrame(cnn_sent_report).transpose().to_csv(f"{RESULTS_DIR}/cnn_sentiment_report.csv")
 
-        train_evaluate_save(model, name, "Emotion", X_train, X_test,
-                            y_train, y_test, le_emotion, texts_test)
+    # LSTM Sentiment Report
+    y_pred_lstm_sent = np.argmax(lstm_sentiment.predict(X_test_s), axis=1)
+    lstm_sent_report = classification_report(
+        y_test_s - 1,  # Convert back to -1,0,1 format
+        y_pred_lstm_sent - 1,  # Convert predictions back to -1,0,1 format
+        target_names=['Negative', 'Neutral', 'Positive'],
+        output_dict=True
+    )
+    pd.DataFrame(lstm_sent_report).transpose().to_csv(f"{RESULTS_DIR}/lstm_sentiment_report.csv")
+
+    # Generate and save emotion classification reports
+    print("\n📊 Generating emotion model reports...")
+    # CNN Emotion Report
+    y_pred_cnn_emo = np.argmax(cnn_emotion.predict(X_test_e), axis=1)
+    cnn_emo_report = classification_report(
+        y_test_e,
+        y_pred_cnn_emo,
+        target_names=EMOTION_CATEGORIES,
+        output_dict=True,
+        zero_division=0
+    )
+    pd.DataFrame(cnn_emo_report).transpose().to_csv(f"{RESULTS_DIR}/cnn_emotion_report.csv")
+
+    # LSTM Emotion Report
+    y_pred_lstm_emo = np.argmax(lstm_emotion.predict(X_test_e), axis=1)
+    lstm_emo_report = classification_report(
+        y_test_e,
+        y_pred_lstm_emo,
+        target_names=EMOTION_CATEGORIES,
+        output_dict=True,
+        zero_division=0
+    )
+    pd.DataFrame(lstm_emo_report).transpose().to_csv(f"{RESULTS_DIR}/lstm_emotion_report.csv")
+
+    # Generate predictions
+    print("\n🔍 Generating predictions...")
+    df['cnn_sentiment'] = np.argmax(cnn_sentiment.predict(padded_sequences), axis=1) - 1
+    df['lstm_sentiment'] = np.argmax(lstm_sentiment.predict(padded_sequences), axis=1) - 1
+    df['cnn_emotion'] = le_emotion.inverse_transform(np.argmax(cnn_emotion.predict(padded_sequences), axis=1))
+    df['lstm_emotion'] = le_emotion.inverse_transform(np.argmax(lstm_emotion.predict(padded_sequences), axis=1))
+
+    # Save results
+    output_cols = [
+        'index', 'comment', 'sentiment', 'emotion', 'clean_comment',
+        'cnn_sentiment', 'lstm_sentiment', 'cnn_emotion', 'lstm_emotion'
+    ]
+    df[output_cols].to_csv(f"{RESULTS_DIR}/hmpv_dl_results.csv", index=False)
+    print("\n✅ Analysis complete. Results saved to 'results/' directory")
 
 if __name__ == "__main__":
     main()
