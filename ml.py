@@ -1,114 +1,127 @@
-# ml_analysis.py
+import os
+import joblib
 import pandas as pd
 import re
 import os
 import joblib
 import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, accuracy_score
+from sklearn.preprocessing import LabelEncoder
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import re
+import nltk
 
-# Configuration
-DATA_PATH = "data/hmpv_comments_labeled.csv"
-RESULTS_DIR = "results"
-MODELS_DIR = "models"
-EMOTION_CATEGORIES = [
-    'happy', 'joy', 'fear', 'anger', 'enthusiasm',
-    'sad', 'relief', 'sympathy', 'surprise', 'disgust', 'unemotional'
-]
+nltk.download('stopwords')
+nltk.download('wordnet')
 
-def clean_text(text):
-    text = re.sub(r"http\S+|www\S+", '', str(text).lower())
-    return re.sub(r'[^a-zA-Z ]', '', text).strip()
+# ========== CONFIG ========== #
+INPUT_FILE = 'input_data.csv'
+OUTPUT_DIR = 'results/ml_models'
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def validate_labels(df):
-    df['sentiment'] = pd.to_numeric(df['sentiment'], errors='coerce')
-    df['sentiment'] = df['sentiment'].fillna(0).astype(int)
-    df = df[df['sentiment'].isin([-1, 0, 1])]
-    df['emotion'] = df['emotion'].apply(lambda x: x if x in EMOTION_CATEGORIES else 'unemotional')
-    return df
+# ========== TEXT CLEANING ========== #
+stop_words = set(stopwords.words('english'))
+lemmatizer = WordNetLemmatizer()
 
+def preprocess(text):
+    text = re.sub(r'[^\w\s]', '', text.lower())
+    words = [lemmatizer.lemmatize(w) for w in text.split() if w not in stop_words]
+    return ' '.join(words)
+
+# ========== TRAIN & SAVE FUNCTION ========== #
+def train_evaluate_save(model, model_name, task_name, X_train, X_test, y_train, y_test, label_encoder, raw_texts_test):
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+
+    train_acc = model.score(X_train, y_train)
+    test_acc = model.score(X_test, y_test)
+
+    # Decode for human-readable output
+    y_test_decoded = label_encoder.inverse_transform(y_test)
+    y_pred_decoded = label_encoder.inverse_transform(y_pred)
+    class_names = [str(c) for c in label_encoder.classes_]
+
+    # Save classification report
+    report = classification_report(
+        y_test_decoded,
+        y_pred_decoded,
+        labels=class_names,
+        target_names=class_names,
+        zero_division=0
+    )
+
+    print(f"{model_name} - {task_name.lower()} - Train Accuracy: {train_acc:.4f}, Test Accuracy: {test_acc:.4f}")
+    print(report)
+
+    # Save model
+    model_path = os.path.join(OUTPUT_DIR, f"{model_name.lower()}_{task_name.lower()}.joblib")
+    joblib.dump(model, model_path)
+
+    # Save predictions
+    pred_df = pd.DataFrame({
+        'text': raw_texts_test,
+        'actual': y_test_decoded,
+        'predicted': y_pred_decoded
+    })
+    pred_file = f"predictions_{task_name.lower()}.csv"
+    pred_df.to_csv(os.path.join(OUTPUT_DIR, pred_file), index=False)
+
+# ========== MAIN ========== #
 def main():
-    os.makedirs(RESULTS_DIR, exist_ok=True)
-    os.makedirs(MODELS_DIR, exist_ok=True)
+    df = pd.read_csv(INPUT_FILE)
+    df.dropna(subset=['comment', 'sentiment', 'emotion'], inplace=True)
+    df['clean_text'] = df['comment'].astype(str).apply(preprocess)
 
-    print("📥 Loading dataset...")
-    df = pd.read_csv(DATA_PATH)
-    df['clean_comment'] = df['comment'].apply(clean_text)
-    df = validate_labels(df)
+    vectorizer = TfidfVectorizer(max_features=5000)
+    X = vectorizer.fit_transform(df['clean_text'])
 
-    le = LabelEncoder()
-    le.fit(EMOTION_CATEGORIES)
-    df['emotion_encoded'] = le.transform(df['emotion'])
+    # Save the vectorizer
+    joblib.dump(vectorizer, os.path.join(OUTPUT_DIR, "tfidf_vectorizer.joblib"))
 
-    print("Unique emotions in labeled data:", df['emotion'].unique())
-    print("Emotion distribution:\n", df['emotion'].value_counts())
+    # Label encoders
+    le_sentiment = LabelEncoder()
+    y_sentiment = le_sentiment.fit_transform(df['sentiment'])
+    joblib.dump(le_sentiment, os.path.join(OUTPUT_DIR, "label_encoder_sentiment.joblib"))
 
-    vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1,2), stop_words='english')
-    X = vectorizer.fit_transform(df['clean_comment'])
-    joblib.dump(vectorizer, f"{MODELS_DIR}/tfidf_vectorizer.joblib")
-    joblib.dump(le, f"{MODELS_DIR}/emotion_encoder.joblib")
+    le_emotion = LabelEncoder()
+    y_emotion = le_emotion.fit_transform(df['emotion'])
+    joblib.dump(le_emotion, os.path.join(OUTPUT_DIR, "label_encoder_emotion.joblib"))
 
-    models = {
-        "naive_bayes": MultinomialNB(),
-        "svm": SVC(kernel='linear', probability=True, random_state=42),
-        "random_forest": RandomForestClassifier(n_estimators=200, random_state=42)
-    }
+    models = [
+        (MultinomialNB(), 'NaiveBayes'),
+        (SVC(kernel='linear', probability=True), 'SVM'),
+        (RandomForestClassifier(n_estimators=100, random_state=42), 'RandomForest')
+    ]
 
-    # ===== Sentiment Analysis =====
-    print("\n🔍 Training Sentiment Models...")
-    X_train_s, X_test_s, y_train_s, y_test_s = train_test_split(
-        X, df['sentiment'], test_size=0.2, stratify=df['sentiment'], random_state=42
+    # --- Sentiment Classification --- #
+    print("\n--- Sentiment Classification ---")
+    X_train, X_test, y_train, y_test, texts_train, texts_test = train_test_split(
+        X, y_sentiment, df['comment'].values, test_size=0.2, random_state=42
     )
-    for name, model in models.items():
-        print(f"🚀 Training {name} for sentiment...")
-        model.fit(X_train_s, y_train_s)
-        df[f'{name}_sentiment'] = model.predict(X)
-        report = classification_report(
-            y_test_s, model.predict(X_test_s),
-            target_names=['Negative', 'Neutral', 'Positive'],
-            output_dict=True
+
+    for model, name in models:
+        train_evaluate_save(
+            model, name, "Sentiment", X_train, X_test,
+            y_train, y_test, le_sentiment, texts_test
         )
-        pd.DataFrame(report).transpose().to_csv(f"{RESULTS_DIR}/{name}_sentiment_report.csv")
-        joblib.dump(model, f"{MODELS_DIR}/{name}_sentiment.joblib")
 
-    # ===== Emotion Analysis =====
-    print("\n🎭 Training Emotion Models...")
-    X_train_e, X_test_e, y_train_e, y_test_e = train_test_split(
-        X, df['emotion_encoded'], test_size=0.2, stratify=df['emotion_encoded'], random_state=42
+    # --- Emotion Classification --- #
+    print("\n--- Emotion Classification ---")
+    X_train, X_test, y_train, y_test, texts_train, texts_test = train_test_split(
+        X, y_emotion, df['comment'].values, test_size=0.2, random_state=42
     )
-    unique_classes = np.unique(y_train_e)
-    emotion_cols = []
-    if len(unique_classes) < 2:
-        print(f"\n⚠️ Skipping emotion analysis - Only 1 class ({le.inverse_transform(unique_classes)[0]}) detected")
-    else:
-        for name, model in models.items():
-            print(f"🚀 Training {name} for emotion...")
-            model.fit(X_train_e, y_train_e)
-            df[f'{name}_emotion_encoded'] = model.predict(X)
-            df[f'{name}_emotion'] = le.inverse_transform(df[f'{name}_emotion_encoded'])
-            emotion_cols.extend([f'{name}_emotion', f'{name}_emotion_encoded'])
-            report = classification_report(
-                y_test_e, model.predict(X_test_e),
-                labels=range(len(EMOTION_CATEGORIES)),
-                target_names=EMOTION_CATEGORIES,
-                output_dict=True,
-                zero_division=0
-            )
-            pd.DataFrame(report).transpose().to_csv(f"{RESULTS_DIR}/{name}_emotion_report.csv")
-            joblib.dump(model, f"{MODELS_DIR}/{name}_emotion.joblib")
 
-    # Save final results (only columns that exist)
-    output_cols = ['index', 'comment', 'sentiment', 'emotion', 'clean_comment']
-    for name in models.keys():
-        output_cols.append(f'{name}_sentiment')
-    output_cols.extend(emotion_cols)
-    df[output_cols].to_csv(f"{RESULTS_DIR}/hmpv_ml_results.csv", index=False)
-    print("\n✅ Analysis complete. Results saved to 'results/' directory.")
+    for model, name in models:
+        train_evaluate_save(
+            model, name, "Emotion", X_train, X_test,
+            y_train, y_test, le_emotion, texts_test
+        )
 
 if __name__ == "__main__":
     main()
