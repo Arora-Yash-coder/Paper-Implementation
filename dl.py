@@ -41,9 +41,7 @@ def build_cnn_model(input_length, vocab_size):
         Dropout(0.5),
         Dense(1, activation='sigmoid')  # for binary, will be replaced
     ])
-    model.compile(loss='sparse_categorical_crossentropy',
-                 optimizer='adam',
-                 metrics=['accuracy'])
+    model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
 def build_lstm_model(input_length, vocab_size):
@@ -54,9 +52,7 @@ def build_lstm_model(input_length, vocab_size):
         Dropout(0.5),
         Dense(1, activation='sigmoid')  # for binary, will be replaced
     ])
-    model.compile(loss='sparse_categorical_crossentropy',
-                 optimizer='adam',
-                 metrics=['accuracy'])
+    model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
 # ========== TRAIN & SAVE FUNCTION ========== #
