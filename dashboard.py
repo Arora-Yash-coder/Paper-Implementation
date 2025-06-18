@@ -1,11 +1,12 @@
+import os
+import re
+import joblib
+import numpy as np
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-import re
-import joblib
-import numpy as np
-import os
+from wordcloud import WordCloud
 from textblob import TextBlob
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from tensorflow.keras.models import load_model
@@ -13,53 +14,64 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 st.set_page_config(page_title="Advanced Sentiment & Emotion Dashboard", layout="wide")
 
-# Constants
+SENTIMENT_VALUES = [-1, 0, 1]
 EMOTION_CATEGORIES = [
     'happy', 'joy', 'fear', 'anger', 'enthusiasm',
     'sad', 'relief', 'sympathy', 'surprise', 'disgust', 'unemotional'
 ]
-SENTIMENT_VALUES = [-1, 0, 1]
 
-# Load models and utilities
 @st.cache_resource
 def load_resources():
     return {
         'vader': SentimentIntensityAnalyzer(),
         'tfidf': joblib.load("results/ml_models/tfidf_vectorizer.joblib"),
         'ml_sentiment': {
-            'naive_bayes': joblib.load("results/ml_models/naive_bayes_sentiment.joblib"),
+            'naive_bayes': joblib.load("results/ml_models/naivebayes_sentiment.joblib"),
             'svm': joblib.load("results/ml_models/svm_sentiment.joblib"),
-            'random_forest': joblib.load("results/ml_models/randomforest_sentiment.joblib")
+            'random_forest': joblib.load("results/ml_models/randomforest_sentiment.joblib"),
         },
         'ml_emotion': {
-            'naive_bayes': joblib.load("results/ml_models/naive_bayes_emotion.joblib"),
+            'naive_bayes': joblib.load("results/ml_models/naivebayes_emotion.joblib"),
             'svm': joblib.load("results/ml_models/svm_emotion.joblib"),
-            'random_forest': joblib.load("results/ml_models/randomforest_emotion.joblib")
+            'random_forest': joblib.load("results/ml_models/randomforest_emotion.joblib"),
         },
         'tokenizer': joblib.load("results/dl_models/tokenizer.joblib"),
         'dl_sentiment': {
             'cnn': load_model("results/dl_models/cnn_sentiment.h5"),
-            'lstm': load_model("results/dl_models/lstm_sentiment.h5")
+            'lstm': load_model("results/dl_models/lstm_sentiment.h5"),
         },
         'dl_emotion': {
             'cnn': load_model("results/dl_models/cnn_emotion.h5"),
-            'lstm': load_model("results/dl_models/lstm_emotion.h5")
+            'lstm': load_model("results/dl_models/lstm_emotion.h5"),
         },
+        'sentiment_encoder': joblib.load("results/dl_models/sentiment_encoder.joblib"),
         'emotion_encoder': joblib.load("results/dl_models/emotion_encoder.joblib")
     }
 
 @st.cache_data
 def load_all_data():
-    def normalize_emotion(df):
-        for col in df.columns:
-            if 'emotion' in col.lower():
-                df[col] = df[col].astype(str).str.lower()
-        return df
-    return {
-        'rule_based': normalize_emotion(pd.read_csv("results/rule_based_models/rule_based_predictions.csv")),
-        'ml': normalize_emotion(pd.read_csv("results/ml_models/ml_predictions.csv")),
-        'dl': normalize_emotion(pd.read_csv("results/dl_models/dl_predictions.csv"))
+    def load_csv(path):
+        return pd.read_csv(path)
+
+    rule_based = load_csv("results/rule_based_models/rule_based_predictions.csv")
+
+    ml_preds = {
+        "naive_bayes_sentiment": load_csv("results/ml_models/predictions_naivebayes_sentiment.csv"),
+        "svm_sentiment": load_csv("results/ml_models/predictions_svm_sentiment.csv"),
+        "random_forest_sentiment": load_csv("results/ml_models/predictions_randomforest_sentiment.csv"),
+        "naive_bayes_emotion": load_csv("results/ml_models/predictions_naivebayes_emotion.csv"),
+        "svm_emotion": load_csv("results/ml_models/predictions_svm_emotion.csv"),
+        "random_forest_emotion": load_csv("results/ml_models/predictions_randomforest_emotion.csv"),
     }
+
+    dl_preds = {
+        "cnn_sentiment": load_csv("results/dl_models/predictions_cnn_sentiment.csv"),
+        "lstm_sentiment": load_csv("results/dl_models/predictions_lstm_sentiment.csv"),
+        "cnn_emotion": load_csv("results/dl_models/predictions_cnn_emotion.csv"),
+        "lstm_emotion": load_csv("results/dl_models/predictions_lstm_emotion.csv"),
+    }
+
+    return {"rule_based": rule_based, "ml": ml_preds, "dl": dl_preds}
 
 def clean_text(text):
     text = re.sub(r"http\S+|www\S+", '', str(text).lower())
@@ -74,10 +86,9 @@ def sidebar_predictions(resources):
 
     if st.sidebar.button("Analyze"):
         if not user_input:
-            st.sidebar.warning("Please enter some text to analyze")
+            st.sidebar.warning("Please enter some text")
             return
         cleaned = clean_text(user_input)
-        result = None
         try:
             if model_type == "Rule-based":
                 if model_choice == "VADER":
@@ -107,127 +118,64 @@ def sidebar_predictions(resources):
         except Exception as e:
             st.sidebar.error(f"Analysis failed: {str(e)}")
 
-def create_sentiment_plots(data, title):
-    data = pd.Categorical(data, categories=SENTIMENT_VALUES)
+def create_sentiment_plot(data, title):
     fig, ax = plt.subplots(figsize=(5, 3))
-    sns.countplot(x=data, ax=ax, palette='viridis', order=SENTIMENT_VALUES)
+    sns.countplot(x=pd.Categorical(data, categories=SENTIMENT_VALUES), ax=ax, order=SENTIMENT_VALUES, palette='viridis')
     ax.set_title(title)
-    ax.set_xlabel('Sentiment (-1=Negative, 0=Neutral, 1=Positive)')
     return fig
 
-def create_emotion_plots(data, title):
-    data = pd.Categorical(data, categories=EMOTION_CATEGORIES)
+def create_emotion_plot(data, title):
     fig, ax = plt.subplots(figsize=(5, 3))
-    sns.countplot(y=data, ax=ax, palette='Set2', order=EMOTION_CATEGORIES)
+    sns.countplot(y=pd.Categorical(data, categories=EMOTION_CATEGORIES), ax=ax, order=EMOTION_CATEGORIES, palette='Set2')
     ax.set_title(title)
     return fig
+
+def generate_wordcloud(texts):
+    all_text = ' '.join(texts.astype(str).tolist())
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(all_text)
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.imshow(wordcloud, interpolation='bilinear')
+    ax.axis("off")
+    st.pyplot(fig)
 
 def main():
-    try:
-        resources = load_resources()
-        data = load_all_data()
-        st.title("📊 Advanced Sentiment & Emotion Analysis Dashboard")
+    resources = load_resources()
+    data = load_all_data()
 
-        with st.expander("Show Raw Data"):
-            tab1, tab2, tab3 = st.tabs(["Rule-based", "ML", "DL"])
-            with tab1:
-                st.dataframe(data['rule_based'])
-            with tab2:
-                st.dataframe(data['ml'])
-            with tab3:
-                st.dataframe(data['dl'])
+    st.title("📊 Advanced Sentiment & Emotion Dashboard")
 
-        # Sentiment Analysis
-        st.header("📈 Sentiment Analysis")
-        st.markdown("#### Rule-based Models")
-        col1, col2 = st.columns(2)
-        with col1:
-            fig = create_sentiment_plots(data['rule_based']['vader_sentiment'], "VADER Sentiment")
-            st.pyplot(fig)
-        with col2:
-            fig = create_sentiment_plots(data['rule_based']['textblob_sentiment'], "TextBlob Sentiment")
-            st.pyplot(fig)
+    with st.expander("📝 Show Raw Data"):
+        st.dataframe(data['rule_based'])
 
-        st.markdown("#### ML Models")
-        col3, col4, col5 = st.columns(3)
-        with col3:
-            fig = create_sentiment_plots(data['ml']['naive_bayes_sentiment'], "Naive Bayes Sentiment")
-            st.pyplot(fig)
-        with col4:
-            fig = create_sentiment_plots(data['ml']['svm_sentiment'], "SVM Sentiment")
-            st.pyplot(fig)
-        with col5:
-            fig = create_sentiment_plots(data['ml']['random_forest_sentiment'], "Random Forest Sentiment")
-            st.pyplot(fig)
+    st.header("📈 Sentiment Analysis")
+    st.subheader("Rule-based Models")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.pyplot(create_sentiment_plot(data['rule_based']['vader_sentiment'], "VADER Sentiment"))
+    with col2:
+        st.pyplot(create_sentiment_plot(data['rule_based']['textblob_sentiment'], "TextBlob Sentiment"))
 
-        st.markdown("#### DL Models")
-        for col in ['cnn_sentiment', 'lstm_sentiment']:
-            data['dl'][col] = pd.Categorical(data['dl'][col], categories=SENTIMENT_VALUES)
-        col6, col7 = st.columns(2)
-        with col6:
-            fig = create_sentiment_plots(data['dl']['cnn_sentiment'], "CNN Sentiment")
-            st.pyplot(fig)
-        with col7:
-            fig = create_sentiment_plots(data['dl']['lstm_sentiment'], "LSTM Sentiment")
-            st.pyplot(fig)
+    st.subheader("ML Models")
+    for model in ["naive_bayes_sentiment", "svm_sentiment", "random_forest_sentiment"]:
+        st.pyplot(create_sentiment_plot(data['ml'][model]['predicted'], f"{model.replace('_', ' ').title()}"))
 
-        # Emotion Analysis
-        st.header("🎭 Emotion Analysis")
-        st.markdown("#### ML Models")
-        col8, col9, col10 = st.columns(3)
-        with col8:
-            fig = create_emotion_plots(data['ml']['naive_bayes_emotion'], "Naive Bayes Emotions")
-            st.pyplot(fig)
-        with col9:
-            fig = create_emotion_plots(data['ml']['svm_emotion'], "SVM Emotions")
-            st.pyplot(fig)
-        with col10:
-            fig = create_emotion_plots(data['ml']['random_forest_emotion'], "Random Forest Emotions")
-            st.pyplot(fig)
+    st.subheader("DL Models")
+    for model in ["cnn_sentiment", "lstm_sentiment"]:
+        st.pyplot(create_sentiment_plot(data['dl'][model]['predicted'], f"{model.replace('_', ' ').title()}"))
 
-        st.markdown("#### DL Models")
-        for col in ['cnn_emotion', 'lstm_emotion']:
-            data['dl'][col] = pd.Categorical(data['dl'][col], categories=EMOTION_CATEGORIES)
-        col11, col12 = st.columns(2)
-        with col11:
-            fig = create_emotion_plots(data['dl']['cnn_emotion'], "CNN Emotions")
-            st.pyplot(fig)
-        with col12:
-            fig = create_emotion_plots(data['dl']['lstm_emotion'], "LSTM Emotions")
-            st.pyplot(fig)
+    st.header("🎭 Emotion Analysis")
+    st.subheader("ML Models")
+    for model in ["naive_bayes_emotion", "svm_emotion", "random_forest_emotion"]:
+        st.pyplot(create_emotion_plot(data['ml'][model]['predicted'], f"{model.replace('_', ' ').title()}"))
 
-        # Model Comparison
-        st.header("🔍 Model Performance Comparison")
-        report_dirs = ["results/rule_based_models", "results/ml_models", "results/dl_models"]
-        report_files = []
-        for folder in report_dirs:
-            report_files += [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith("_report.csv")]
+    st.subheader("DL Models")
+    for model in ["cnn_emotion", "lstm_emotion"]:
+        st.pyplot(create_emotion_plot(data['dl'][model]['predicted'], f"{model.replace('_', ' ').title()}"))
 
-        model_reports = {}
-        for file in report_files:
-            model_name = os.path.basename(file).replace("_report.csv", "").replace("_", " ").title()
-            df = pd.read_csv(file, index_col=0)
-            model_reports[model_name] = df
+    st.header("☁️ Word Cloud (Rule-based Comments)")
+    generate_wordcloud(data['rule_based']['comment'])
 
-        if model_reports:
-            selected_report = st.selectbox("Select Classification Report", model_reports.keys())
-            st.dataframe(model_reports[selected_report])
-            f1_scores = {}
-            for model, report in model_reports.items():
-                for key in ['weighted avg', 'weighted_avg', 'macro avg']:
-                    if key in report.index:
-                        f1_scores[model] = report.loc[key, 'f1-score']
-                        break
-            if f1_scores:
-                fig, ax = plt.subplots(figsize=(12, 6))
-                sns.barplot(x=list(f1_scores.keys()), y=list(f1_scores.values()), palette='rocket')
-                plt.title('F1 Score Comparison Across Models')
-                plt.xticks(rotation=45)
-                st.pyplot(fig)
-        else:
-            st.warning("No classification reports found.")
-    except Exception as e:
-        st.error(f"Dashboard failed to load: {str(e)}")
+    
 
 if __name__ == "__main__":
     sidebar_predictions(load_resources())

@@ -1,0 +1,3 @@
+Rule-Based Sentiment Model Accuracies
+VADER Accuracy: 0.4665
+TextBlob Accuracy: 0.4498

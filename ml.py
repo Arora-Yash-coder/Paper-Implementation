@@ -66,7 +66,7 @@ def train_evaluate_save(model, model_name, task_name, X_train, X_test, y_train, 
         'actual': y_test_decoded,
         'predicted': y_pred_decoded
     })
-    pred_file = f"predictions_{task_name.lower()}.csv"
+    pred_file = f"predictions_{model_name.lower()}_{task_name.lower()}.csv"
     pred_df.to_csv(os.path.join(OUTPUT_DIR, pred_file), index=False)
 
 # ========== MAIN ========== #
