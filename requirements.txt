@@ -3,6 +3,7 @@ pandas
 numpy
 matplotlib
 seaborn
+wordcloud
 
 # Machine Learning
 scikit-learn

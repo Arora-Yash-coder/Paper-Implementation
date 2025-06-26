@@ -86,7 +86,6 @@ def main():
     df = pd.read_csv(input_file)
     df.dropna(subset=['comment', 'sentiment', 'emotion'], inplace=True)
     df['comment'] = df['comment'].apply(preprocess_text)
-
     df['sentiment_encoded'] = df['sentiment'].astype(int)
 
     emotion_encoder = LabelEncoder()
