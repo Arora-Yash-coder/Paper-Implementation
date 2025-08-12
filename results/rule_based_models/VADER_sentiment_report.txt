@@ -2,12 +2,12 @@ VADER Sentiment Classification Report:
 
               precision    recall  f1-score   support
 
-          -1       0.56      0.38      0.46      4593
-           0       0.50      0.53      0.51      4224
-           1       0.31      0.47      0.37      2285
+          -1       0.57      0.40      0.47      4593
+           0       0.50      0.55      0.52      4224
+           1       0.32      0.45      0.37      2285
 
-    accuracy                           0.46     11102
-   macro avg       0.46      0.46      0.45     11102
-weighted avg       0.48      0.46      0.46     11102
+    accuracy                           0.47     11102
+   macro avg       0.46      0.47      0.45     11102
+weighted avg       0.49      0.47      0.47     11102
 
-Accuracy: 0.4562
+Accuracy: 0.4661

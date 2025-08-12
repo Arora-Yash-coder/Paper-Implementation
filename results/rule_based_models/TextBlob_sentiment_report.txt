@@ -2,12 +2,12 @@ TextBlob Sentiment Classification Report:
 
               precision    recall  f1-score   support
 
-          -1       0.56      0.26      0.35      4593
-           0       0.43      0.61      0.51      4224
-           1       0.29      0.38      0.33      2285
+          -1       0.57      0.24      0.33      4593
+           0       0.42      0.65      0.51      4224
+           1       0.29      0.34      0.31      2285
 
     accuracy                           0.42     11102
-   macro avg       0.43      0.42      0.40     11102
-weighted avg       0.45      0.42      0.41     11102
+   macro avg       0.43      0.41      0.39     11102
+weighted avg       0.46      0.42      0.40     11102
 
-Accuracy: 0.4172
+Accuracy: 0.4152

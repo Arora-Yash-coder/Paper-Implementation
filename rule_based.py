@@ -12,10 +12,16 @@ from cleantext import clean
 
 nltk.download('vader_lexicon')
 nltk.download('stopwords')
-
 from nltk.corpus import stopwords
 
-def preprocess_text(text):
+# Light clean for VADER (preserve punctuation/emojis)
+def preprocess_for_vader(text):
+    if pd.isna(text):
+        return ""
+    return str(text).lower().strip()
+
+# Aggressive clean for TextBlob
+def preprocess_for_textblob(text):
     if pd.isna(text):
         return ""
     text = text.lower()
@@ -42,25 +48,27 @@ def preprocess_text(text):
     tokens = [word for word in tokens if word not in stop_words]
     return " ".join(tokens)
 
+# Updated VADER logic with tweaked thresholds
 def vader_sentiment(text):
     if not text:
         return 0
     scores = SentimentIntensityAnalyzer().polarity_scores(text)
     compound = scores['compound']
-    if compound >= 0.05:
+    if compound >= 0.1:
         return 1
-    elif compound <= -0.05:
+    elif compound <= -0.1:
         return -1
     else:
         return 0
 
+# Updated TextBlob logic with tweaked thresholds
 def textblob_sentiment(text):
     if not text:
         return 0
     polarity = TextBlob(text).sentiment.polarity
-    if polarity > 0.05:
+    if polarity >= 0.1:
         return 1
-    elif polarity < -0.05:
+    elif polarity <= -0.1:
         return -1
     else:
         return 0
@@ -85,30 +93,35 @@ def main():
 
     df = pd.read_csv(input_file)
     df.dropna(subset=['comment', 'sentiment', 'emotion'], inplace=True)
-    df['comment'] = df['comment'].apply(preprocess_text)
-    df['sentiment_encoded'] = df['sentiment'].astype(int)
 
+    # Encode sentiment/emotion
+    df['sentiment_encoded'] = df['sentiment'].astype(int)
     emotion_encoder = LabelEncoder()
     df['emotion_encoded'] = emotion_encoder.fit_transform(df['emotion'])
     np.save(os.path.join(output_dir, 'emotion_classes.npy'), emotion_encoder.classes_)
 
-    df['vader_sentiment'] = df['comment'].apply(vader_sentiment)
-    df['textblob_sentiment'] = df['comment'].apply(textblob_sentiment)
+    # Apply separate preprocessing
+    df['comment_vader'] = df['comment'].apply(preprocess_for_vader)
+    df['comment_textblob'] = df['comment'].apply(preprocess_for_textblob)
 
-    # Sentiment Evaluation
+    # Run sentiment prediction
+    df['vader_sentiment'] = df['comment_vader'].apply(vader_sentiment)
+    df['textblob_sentiment'] = df['comment_textblob'].apply(textblob_sentiment)
+
+    # Evaluate
     vader_acc = evaluate_model(df['sentiment_encoded'], df['vader_sentiment'],
                                model_name='VADER', task='sentiment', output_dir=output_dir)
     textblob_acc = evaluate_model(df['sentiment_encoded'], df['textblob_sentiment'],
                                   model_name='TextBlob', task='sentiment', output_dir=output_dir)
 
-    # Log accuracies
+    # Save accuracies
     log_file = os.path.join(output_dir, "accuracies.txt")
     with open(log_file, 'w') as f:
         f.write("Rule-Based Sentiment Model Accuracies\n")
         f.write(f"VADER Accuracy: {vader_acc:.4f}\n")
         f.write(f"TextBlob Accuracy: {textblob_acc:.4f}\n")
 
-    # Save predictions
+    # Save final predictions
     df.to_csv(os.path.join(output_dir, "rule_based_predictions.csv"), index=False)
     print("Rule-based sentiment analysis complete. Results saved.")
 
