@@ -4,6 +4,7 @@ numpy
 matplotlib
 seaborn
 wordcloud
+plotly
 
 # Machine Learning
 scikit-learn
