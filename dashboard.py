@@ -19,18 +19,29 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
 
 # -------------------------
-# Project paths (your layout)
+# Project paths
 # -------------------------
 ROOT = Path(".")
 ML_PATH = ROOT / "results" / "ml_models"
 DL_PATH = ROOT / "results" / "dl_models"
 ENSEMBLE_PATH = ROOT / "results" / "ensemble_models"
 RULE_PATH = ROOT / "results" / "rule_based_models"
+BERT_PATH = ROOT / "results" / "bert_model"
 
 # -------------------------
-# Page config
+# Page config + small style
 # -------------------------
 st.set_page_config(page_title="HMPV Dashboard", layout="wide", page_icon="📊")
+st.markdown(
+    """
+    <style>
+    /* Slight polish for metrics and containers */
+    .stMetric > div[role='button'] { border-radius: 8px; padding: 6px 10px; }
+    .stMarkdown { color: #111827; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 st.title("HMPV — Sentiment & Emotion Dashboard")
 st.markdown("Minimal presentation view. Use the **sidebar** for real-time predictions (per-model + ensemble).")
 
@@ -101,20 +112,20 @@ def textblob_label(text: str, pos_thr=0.05, neg_thr=-0.05):
         return "-1"
     return "0"
 
-# decode helper: try to inverse_transform if encoder exists, otherwise return string
 def decode_prediction(raw_pred, label_encoder):
     if label_encoder is None:
         return str(raw_pred)
     try:
-        # If model returns integer/np.int64
         return label_encoder.inverse_transform([int(raw_pred)])[0]
     except Exception:
         try:
-            # If model returns string-coded value already (like '-1','0','1')
             return label_encoder.inverse_transform([str(raw_pred)])[0]
         except Exception:
-            # fallback
             return str(raw_pred)
+
+def safe_mean(values):
+    vals = [v for v in values if v is not None and (not isinstance(v, float) or not np.isnan(v))]
+    return float(np.mean(vals)) if vals else None
 
 # -------------------------
 # Cached loaders
@@ -162,6 +173,9 @@ def load_prediction_csvs():
         ENSEMBLE_PATH / "ensemble_lightgbm_sentiment.csv",
         ENSEMBLE_PATH / "ensemble_lightgbm_emotion.csv",
         RULE_PATH / "rule_based_predictions.csv",
+        # BERT (comparison only)
+        BERT_PATH / "predictions_sentiment.csv",
+        BERT_PATH / "predictions_emotion.csv",
     ]
     for p in candidates:
         if p.exists():
@@ -175,122 +189,240 @@ artifacts = load_artifacts()
 pred_csvs = load_prediction_csvs()
 
 # -------------------------
-# Main page: metrics & visuals (kept minimal)
+# Layout: Tabs for clarity
 # -------------------------
-st.header("Overview")
-sent_ens_df = pred_csvs.get("ensemble_lightgbm_sentiment.csv")
-em_ens_df = pred_csvs.get("ensemble_lightgbm_emotion.csv")
+tab_overview, tab_models, tab_confmat, tab_wordclouds = st.tabs(
+    ["📌 Overview", "📊 Model Accuracy", "🧾 Confusion Matrices", "☁️ Word Clouds"]
+)
 
-c1, c2, c3 = st.columns(3)
-with c1:
-    if sent_ens_df is not None and {"actual", "ensemble_predicted"}.issubset(sent_ens_df.columns):
-        sent_acc = (sent_ens_df["actual"].astype(str) == sent_ens_df["ensemble_predicted"].astype(str)).mean() * 100
-        st.metric("Sentiment Ensemble Accuracy", f"{sent_acc:.2f}%")
-    else:
-        st.metric("Sentiment Ensemble Accuracy", "N/A")
-with c2:
-    if em_ens_df is not None and {"actual", "ensemble_predicted"}.issubset(em_ens_df.columns):
-        em_acc = (em_ens_df["actual"].astype(str) == em_ens_df["ensemble_predicted"].astype(str)).mean() * 100
-        st.metric("Emotion Ensemble Accuracy", f"{em_acc:.2f}%")
-    else:
-        st.metric("Emotion Ensemble Accuracy", "N/A")
-with c3:
-    sample_count = max((len(df) for df in pred_csvs.values()), default=0)
-    st.metric("Samples (max rows)", f"{sample_count}")
+# -------------------------
+# Tab: Overview (top metrics + radar)
+# -------------------------
+with tab_overview:
+    st.header("Overview")
+    sent_ens_df = pred_csvs.get("ensemble_lightgbm_sentiment.csv")
+    em_ens_df = pred_csvs.get("ensemble_lightgbm_emotion.csv")
 
-st.markdown("---")
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        if sent_ens_df is not None and {"actual", "ensemble_predicted"}.issubset(sent_ens_df.columns):
+            sent_acc = (sent_ens_df["actual"].astype(str) == sent_ens_df["ensemble_predicted"].astype(str)).mean() * 100
+            st.metric("Sentiment Ensemble Accuracy", f"{sent_acc:.2f}%")
+        else:
+            st.metric("Sentiment Ensemble Accuracy", "N/A")
+    with c2:
+        if em_ens_df is not None and {"actual", "ensemble_predicted"}.issubset(em_ens_df.columns):
+            em_acc = (em_ens_df["actual"].astype(str) == em_ens_df["ensemble_predicted"].astype(str)).mean() * 100
+            st.metric("Emotion Ensemble Accuracy", f"{em_acc:.2f}%")
+        else:
+            st.metric("Emotion Ensemble Accuracy", "N/A")
+    with c3:
+        sample_count = max((len(df) for df in pred_csvs.values()), default=0)
+        st.metric("Samples (max rows)", f"{sample_count}")
 
-# Model accuracies bars (compact)
-def compute_accuracy(df):
-    if df is None:
+    st.markdown("---")
+
+    # Summary metrics for families
+    def compute_accuracy(df):
+        if df is None:
+            return None
+        if "predicted" in df.columns and "actual" in df.columns:
+            return (df["predicted"].astype(str) == df["actual"].astype(str)).mean()*100
+        if "ensemble_predicted" in df.columns and "actual" in df.columns:
+            return (df["ensemble_predicted"].astype(str) == df["actual"].astype(str)).mean()*100
         return None
-    if "predicted" in df.columns and "actual" in df.columns:
-        return (df["predicted"].astype(str) == df["actual"].astype(str)).mean()*100
-    if "ensemble_predicted" in df.columns and "actual" in df.columns:
-        return (df["ensemble_predicted"].astype(str) == df["actual"].astype(str)).mean()*100
-    return None
 
-acc_sent = []
-acc_em = []
-for name, df in pred_csvs.items():
-    ln = name.lower()
-    if "sentiment" in ln:
-        a = compute_accuracy(df)
-        if a is not None:
-            acc_sent.append((name.replace(".csv",""), round(a,2)))
-    if "emotion" in ln:
-        a = compute_accuracy(df)
-        if a is not None:
-            acc_em.append((name.replace(".csv",""), round(a,2)))
+    # quick helpers to collect family accuracies
+    ml_keys = [k for k in pred_csvs.keys() if any(x in k.lower() for x in ["svm", "randomforest", "naivebayes"])]
+    dl_keys = [k for k in pred_csvs.keys() if any(x in k.lower() for x in ["cnn", "lstm"])]
+    rule_key = "rule_based_predictions.csv"
+    bert_sent_key = "predictions_sentiment.csv"
+    bert_em_key = "predictions_emotion.csv"
+    ens_sent_key = "ensemble_lightgbm_sentiment.csv"
+    ens_em_key = "ensemble_lightgbm_emotion.csv"
 
-left, right = st.columns(2)
-with left:
-    st.subheader("Sentiment model accuracies")
-    if acc_sent:
-        df_acc = pd.DataFrame(acc_sent, columns=["Model","Accuracy"]).sort_values("Accuracy", ascending=False)
-        fig = px.bar(df_acc, x="Model", y="Accuracy", text="Accuracy", height=300, template="simple_white")
-        fig.update_yaxes(range=[0,100])
-        st.plotly_chart(fig, use_container_width=True)
+    ml_accs = [compute_accuracy(pred_csvs.get(k)) for k in ml_keys]
+    dl_accs = [compute_accuracy(pred_csvs.get(k)) for k in dl_keys]
+    rule_acc = compute_accuracy(pred_csvs.get(rule_key))
+    bert_accs = [compute_accuracy(pred_csvs.get(bert_sent_key)), compute_accuracy(pred_csvs.get(bert_em_key))]
+    ens_sent_acc = compute_accuracy(pred_csvs.get(ens_sent_key))
+    ens_em_acc = compute_accuracy(pred_csvs.get(ens_em_key))
+
+    avg_ml = safe_mean(ml_accs)
+    avg_dl = safe_mean(dl_accs)
+    avg_rule = rule_acc
+    avg_bert = safe_mean(bert_accs)
+    avg_ens_pair = safe_mean([ens_sent_acc, ens_em_acc])
+
+    c1, c2, c3, c4, c5 = st.columns(5)
+    c1.metric("ML Avg Accuracy", f"{avg_ml:.2f}%" if avg_ml is not None else "N/A")
+    c2.metric("DL Avg Accuracy", f"{avg_dl:.2f}%" if avg_dl is not None else "N/A")
+    c3.metric("Rule-based", f"{avg_rule:.2f}%" if avg_rule is not None else "N/A")
+    c4.metric("Ensemble (avg)", f"{avg_ens_pair:.2f}%" if avg_ens_pair is not None else "N/A")
+    c5.metric("BERT (comparison)", f"{avg_bert:.2f}%" if avg_bert is not None else "N/A")
+
+    st.markdown("---")
+
+    # Radar chart (visual comparison)
+    radar_df = pd.DataFrame({
+        "Category": ["ML", "DL", "Rule-Based", "Ensemble", "BERT"],
+        "Accuracy": [
+            avg_ml if avg_ml is not None else 0,
+            avg_dl if avg_dl is not None else 0,
+            avg_rule if avg_rule is not None else 0,
+            avg_ens_pair if avg_ens_pair is not None else 0,
+            avg_bert if avg_bert is not None else 0,
+        ],
+    })
+    # only show radar if at least one non-zero
+    if radar_df["Accuracy"].sum() > 0:
+        fig_radar = px.line_polar(radar_df, r="Accuracy", theta="Category", line_close=True,
+                                  title="Model Category Performance Radar", template="plotly_white")
+        fig_radar.update_traces(fill="toself")
+        st.plotly_chart(fig_radar, use_container_width=True)
     else:
-        st.info("No sentiment CSVs found.")
-with right:
-    st.subheader("Emotion model accuracies")
-    if acc_em:
-        df_acc2 = pd.DataFrame(acc_em, columns=["Model","Accuracy"]).sort_values("Accuracy", ascending=False)
-        fig2 = px.bar(df_acc2, x="Model", y="Accuracy", text="Accuracy", height=300, template="simple_white")
-        fig2.update_yaxes(range=[0,100])
-        st.plotly_chart(fig2, use_container_width=True)
-    else:
-        st.info("No emotion CSVs found.")
-
-st.markdown("---")
-
-# Confusion matrices (ensemble)
-st.subheader("Confusion Matrices (Ensembles)")
-cm1, cm2 = st.columns(2)
-with cm1:
-    if sent_ens_df is not None and {"actual","ensemble_predicted"}.issubset(sent_ens_df.columns):
-        y_true = sent_ens_df["actual"].astype(str)
-        y_pred = sent_ens_df["ensemble_predicted"].astype(str)
-        labels = sorted(list(set(y_true.tolist()+y_pred.tolist())), key=str)
-        cm = confusion_matrix(y_true, y_pred, labels=labels)
-        fig, ax = plt.subplots(figsize=(4,3))
-        sns.heatmap(cm, annot=True, fmt="d", xticklabels=labels, yticklabels=labels, cmap="Blues", ax=ax)
-        ax.set_xlabel("Predicted"); ax.set_ylabel("Actual")
-        st.pyplot(fig)
-    else:
-        st.info("Sentiment ensemble CSV missing (needs 'actual' & 'ensemble_predicted').")
-with cm2:
-    if em_ens_df is not None and {"actual","ensemble_predicted"}.issubset(em_ens_df.columns):
-        y_true = em_ens_df["actual"].astype(str)
-        y_pred = em_ens_df["ensemble_predicted"].astype(str)
-        labels = sorted(list(set(y_true.tolist()+y_pred.tolist())), key=str)
-        cm = confusion_matrix(y_true, y_pred, labels=labels)
-        fig2, ax2 = plt.subplots(figsize=(4,3))
-        sns.heatmap(cm, annot=True, fmt="d", xticklabels=labels, yticklabels=labels, cmap="Blues", ax=ax2)
-        ax2.set_xlabel("Predicted"); ax2.set_ylabel("Actual")
-        st.pyplot(fig2)
-    else:
-        st.info("Emotion ensemble CSV missing (needs 'actual' & 'ensemble_predicted').")
-
-st.markdown("---")
-
-# Single word cloud (positive comments)
-st.subheader("Word Cloud — Positive Comments")
-rb = pred_csvs.get("rule_based_predictions.csv")
-if rb is not None and "text" in rb.columns and "sentiment" in rb.columns:
-    pos_texts = rb[rb["sentiment"].astype(str).str.contains("1")]["text"].dropna().astype(str).tolist()
-    if pos_texts:
-        wc = WordCloud(width=800, height=300, background_color="white").generate(" ".join(pos_texts))
-        st.image(wc.to_array(), use_column_width=True)
-    else:
-        st.info("No positive comments found.")
-else:
-    st.info("rule_based_predictions.csv not available (needed for word cloud).")
-
+        st.info("Not enough model results found to draw radar chart.")
 
 # -------------------------
-# Sidebar: Real-time prediction (per-model + ensemble) — display results in sidebar
+# Tab: Model Accuracy (per-model bars + per-class accuracy)
+# -------------------------
+with tab_models:
+    st.header("Model Accuracy — Detailed")
+    # reuse compute_accuracy from above
+    acc_sent = []
+    acc_em = []
+    for name, df in pred_csvs.items():
+        ln = name.lower()
+        if "sentiment" in ln:
+            a = compute_accuracy(df)
+            if a is not None:
+                acc_sent.append((name.replace(".csv",""), round(a,2)))
+        if "emotion" in ln:
+            a = compute_accuracy(df)
+            if a is not None:
+                acc_em.append((name.replace(".csv",""), round(a,2)))
+
+    left, right = st.columns(2)
+    with left:
+        st.subheader("Sentiment model accuracies")
+        if acc_sent:
+            df_acc = pd.DataFrame(acc_sent, columns=["Model","Accuracy"]).sort_values("Accuracy", ascending=False)
+            fig = px.bar(df_acc, x="Model", y="Accuracy", text="Accuracy", height=400, template="simple_white")
+            fig.update_yaxes(range=[0,100])
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("No sentiment CSVs found.")
+    with right:
+        st.subheader("Emotion model accuracies")
+        if acc_em:
+            df_acc2 = pd.DataFrame(acc_em, columns=["Model","Accuracy"]).sort_values("Accuracy", ascending=False)
+            fig2 = px.bar(df_acc2, x="Model", y="Accuracy", text="Accuracy", height=400, template="simple_white")
+            fig2.update_yaxes(range=[0,100])
+            st.plotly_chart(fig2, use_container_width=True)
+        else:
+            st.info("No emotion CSVs found.")
+
+    st.markdown("---")
+    # Class-wise accuracy for ensemble
+    st.subheader("Ensemble — Class-wise Accuracy")
+    selected_task = st.selectbox("Select ensemble task for class-wise accuracy", ["sentiment", "emotion"], index=0)
+    ens_key = f"ensemble_lightgbm_{selected_task}.csv"
+    ens_df = pred_csvs.get(ens_key)
+    if ens_df is not None and {"actual","ensemble_predicted"}.issubset(ens_df.columns):
+        cls_acc = (
+            ens_df.groupby("actual")
+            .apply(lambda x: (x["actual"].astype(str) == x["ensemble_predicted"].astype(str)).mean()*100)
+            .reset_index(name="Accuracy")
+        )
+        fig_cls = px.bar(cls_acc, x="actual", y="Accuracy", color="Accuracy",
+                         title=f"{selected_task.capitalize()} Ensemble — Per-Class Accuracy",
+                         text_auto=".2f", height=350, template="simple_white")
+        st.plotly_chart(fig_cls, use_container_width=True)
+    else:
+        st.info("No ensemble CSV available for the selected task (needs 'actual' & 'ensemble_predicted').")
+
+# -------------------------
+# Tab: Confusion Matrices (expanders)
+# -------------------------
+with tab_confmat:
+    st.header("Confusion Matrices — Detailed")
+    # list of candidate CSVs to display confusion matrices (prioritize ones that exist)
+    candidate_cm = [
+        "predictions_svm_sentiment.csv",
+        "predictions_randomforest_sentiment.csv",
+        "predictions_naivebayes_sentiment.csv",
+        "predictions_cnn_sentiment.csv",
+        "predictions_lstm_sentiment.csv",
+        "ensemble_lightgbm_sentiment.csv",
+        "predictions_sentiment.csv",  # BERT sentiment
+        "predictions_svm_emotion.csv",
+        "predictions_randomforest_emotion.csv",
+        "predictions_naivebayes_emotion.csv",
+        "predictions_cnn_emotion.csv",
+        "predictions_lstm_emotion.csv",
+        "ensemble_lightgbm_emotion.csv",
+        "predictions_emotion.csv",  # BERT emotion
+    ]
+    for csv_name in candidate_cm:
+        if csv_name in pred_csvs:
+            with st.expander(csv_name.replace(".csv","").replace("_", " ").title(), expanded=False):
+                df = pred_csvs[csv_name]
+                if {"actual","predicted"}.issubset(df.columns):
+                    y_true = df["actual"].astype(str)
+                    y_pred = df["predicted"].astype(str)
+                    labels = sorted(list(set(y_true.tolist() + y_pred.tolist())), key=str)
+                    cm = confusion_matrix(y_true, y_pred, labels=labels)
+                    fig, ax = plt.subplots(figsize=(5,4))
+                    sns.heatmap(cm, annot=True, fmt="d", cmap="YlGnBu", xticklabels=labels, yticklabels=labels, ax=ax)
+                    ax.set_xlabel("Predicted"); ax.set_ylabel("Actual")
+                    st.pyplot(fig)
+                elif {"actual","ensemble_predicted"}.issubset(df.columns):
+                    y_true = df["actual"].astype(str)
+                    y_pred = df["ensemble_predicted"].astype(str)
+                    labels = sorted(list(set(y_true.tolist() + y_pred.tolist())), key=str)
+                    cm = confusion_matrix(y_true, y_pred, labels=labels)
+                    fig, ax = plt.subplots(figsize=(5,4))
+                    sns.heatmap(cm, annot=True, fmt="d", cmap="YlGnBu", xticklabels=labels, yticklabels=labels, ax=ax)
+                    ax.set_xlabel("Predicted"); ax.set_ylabel("Actual")
+                    st.pyplot(fig)
+                else:
+                    st.info("CSV does not contain the required 'actual'/'predicted' columns to build confusion matrix.")
+
+# -------------------------
+# Tab: Word Clouds (positive / neutral / negative)
+# -------------------------
+with tab_wordclouds:
+    st.header("Word Clouds — Sentiment Categories")
+    rb = pred_csvs.get("rule_based_predictions.csv")
+    if rb is None or "text" not in rb.columns or "sentiment" not in rb.columns:
+        st.info("rule_based_predictions.csv not available or missing 'text'/'sentiment' columns (needed for word clouds).")
+    else:
+        cols_wc = st.columns(3)
+        label_map = {"1": "Positive (1)", "0": "Neutral (0)", "-1": "Negative (-1)"}
+        for i, label in enumerate(["1", "0", "-1"]):
+            with cols_wc[i]:
+                texts = rb[rb["sentiment"].astype(str) == label]["text"].dropna().astype(str).tolist()
+                st.subheader(label_map[label])
+                if texts:
+                    wc = WordCloud(width=600, height=300, background_color="white", collocations=False).generate(" ".join(texts))
+                    st.image(wc.to_array(), use_column_width=True)
+                else:
+                    st.info("No comments for this label.")
+
+    st.markdown("---")
+    # Single word cloud summary for overall positive (backup)
+    st.subheader("Word Cloud — Positive Comments (Summary)")
+    if rb is not None and "text" in rb.columns and "sentiment" in rb.columns:
+        pos_texts = rb[rb["sentiment"].astype(str).str.contains("1")]["text"].dropna().astype(str).tolist()
+        if pos_texts:
+            wc = WordCloud(width=800, height=300, background_color="white").generate(" ".join(pos_texts))
+            st.image(wc.to_array(), use_column_width=True)
+        else:
+            st.info("No positive comments found.")
+
+# -------------------------
+# Sidebar: Real-time prediction (per-model + ensemble)
+# (kept unchanged except BERT is added as comparison-only)
 # -------------------------
 st.sidebar.header("Real-time prediction (per-model + ensemble)")
 task = st.sidebar.selectbox("Task", ["sentiment", "emotion"])
@@ -315,9 +447,11 @@ if st.sidebar.button("Predict"):
         if task == "sentiment":
             ml_list = [("rf_sent","RandomForest","le_sent_ml"), ("svm_sent","SVM","le_sent_ml"), ("nb_sent","NaiveBayes","le_sent_ml")]
             dl_list = [("cnn_sent","CNN","le_sent_dl"), ("lstm_sent","LSTM","le_sent_dl")]
+            transformer_list = [("bert_sent","BERT","le_sent_dl")]  # BERT = comparison only
         else:
             ml_list = [("rf_em","RandomForest","le_em_ml"), ("svm_em","SVM","le_em_ml"), ("nb_em","NaiveBayes","le_em_ml")]
             dl_list = [("cnn_em","CNN","le_em_dl"), ("lstm_em","LSTM","le_em_dl")]
+            transformer_list = [("bert_em","BERT","le_em_dl")]
 
         # ML predictions
         for key, label_name, le_key in ml_list:
@@ -355,6 +489,20 @@ if st.sidebar.button("Predict"):
                 pred_label = "n/a"
             per_model_rows.append((label_name, pred_label))
 
+        # BERT (comparison only via its prediction CSV)
+        for key, label_name, le_key in transformer_list:
+            csv_path = BERT_PATH / f"predictions_{task}.csv"
+            if csv_path.exists():
+                try:
+                    df_pred = pd.read_csv(csv_path)
+                    # mode is used as a simple stand-in for a static prediction label
+                    pred_label = str(df_pred["predicted"].mode()[0])
+                except Exception:
+                    pred_label = "err"
+            else:
+                pred_label = "n/a"
+            per_model_rows.append((label_name, pred_label))
+
         # rule-based (only for sentiment)
         if task == "sentiment":
             per_model_rows.append(("VADER", vader_label(input_text)))
@@ -378,6 +526,7 @@ if st.sidebar.button("Predict"):
             else:
                 model_obj = ens_obj
 
+            # IMPORTANT: BERT is NOT part of ensemble features (comparison only)
             if not feat_cols:
                 feat_cols = ['rf','svm','nb','cnn','lstm','vader','textblob'] if task=="sentiment" else ['rf','svm','nb','cnn','lstm']
 
@@ -440,4 +589,4 @@ if combined is not None:
 else:
     st.info("No ensemble CSVs found. Run ensemble script to generate them.")
 
-st.caption("Minimal dashboard — real-time predictions shown in sidebar.")
+st.caption("Polished dashboard — real-time predictions in sidebar. BERT shown for comparison only (not part of ensemble).")
